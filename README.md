@@ -1,4 +1,4 @@
-## :warning: This repository contains building the server side of the Befer app, which was already written with Angular. The development of the initial client side code can be found in [this repository.](https://github.com/SvilenStoev/Angular-App-Befer). 
+> **Note**: This repository contains the code for building the server side of the Befer app, which was already written with Angular. The development of the initial client side code can be found in [this repository.](https://github.com/SvilenStoev/Angular-App-Befer) :warning: 
 
 ## &copy; Befer - Logo
 ![BoostUp Logo 4](https://www.linkpicture.com/q/Logo21.png)
@@ -34,7 +34,7 @@ Befer is a platform, where users can introduce their best pictures and great tra
 ### 2. Posts
 
 All authenticated users are able to add posts. For this purpose they should fill a form with basic details for their post (title, "Before" image URL, "After" image URL, optionaly: description and they can chose whether their post will be public or private).
-> :warning: **Note**: Once successfully added a private post, it is visible only in "My Posts" page and it is not visible to other users.
+> **Note**: Once successfully added a private post, it is visible only in "My Posts" page and it is not visible to other users.
 
 If the post is public It is shown in "all posts page" and can be visible on home page, but only if the post entered top 5 / 10 posts by creation date or likes.
 All posts can be accessed using "All posts" button in the navbar, where there is a option for sorting them by likes or creation date. Top 5 or top 10 posts can be seen on home page with option for sorting them by likes or creation date.
@@ -63,11 +63,16 @@ Don't forget to see your score and rank at the end! :trophy:
 - You can access the game from "page not found". So get the URL wrong. :smiley:
 - Or directly from this URL: https://befer-app.web.app/spacefight
 
-> :warning: **Note**: You have to be logged in to play the game. Your scores are important for me and the ranking list.
+> **Note**: You have to be logged in to play the game. Your scores are important for me and the ranking list.
 
-> :warning: **Note**: For best game play experience play on screen with resolution 1920x1080!
+> **Note**: For best game play experience play on screen with resolution 1920x1080!
 
 ## :hammer: Built With
+- [ASP.NET CORE 6.0](https://github.com/dotnet/aspnetcore) WEB API
+- [EntityFrameworkCore](https://github.com/dotnet/efcore) 
+- [In-Memmory Cache](https://github.com/aspnet/Caching)
+- MSSQL Server
+- [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 - [Angular](https://github.com/angular)
 - Angular - validations with reactive forms and ngForm
 - Angular - modules, components, directives, pipes, router, httpRequest and other features
