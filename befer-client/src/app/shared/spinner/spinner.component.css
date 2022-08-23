@@ -1,0 +1,50 @@
+#beferSpinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 0.2s;
+}
+
+/* (B) CENTER LOADING SPINNER */
+#beferSpinner .beferSpinner-img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  visibility: visible;
+  opacity: 1;
+  width: 90px;
+  transform: translate(-50%, -50%);
+}
+
+.fa-spin-reverse {
+  -webkit-animation: fa-spin-reverse 2s infinite linear;
+  animation: fa-spin-reverse 2s infinite linear;
+}
+
+@-webkit-keyframes fa-spin-reverse {
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  0% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes fa-spin-reverse {
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  0% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}

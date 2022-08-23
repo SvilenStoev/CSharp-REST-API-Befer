@@ -1,0 +1,90 @@
+.details>h3 {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.new-comment {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.container {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+
+.new-comment textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 2px;
+}
+
+.comments li {
+    display: block;
+    width: 80vw;
+    max-width: 720px;
+    margin: 32px auto 32px auto;
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 16px;
+}
+
+.comment {
+    background-color: white;
+}
+
+.comment p {
+    padding: 16px;
+}
+
+.comment header {
+    border-radius: 16px 16px 0 0;
+    background-color: #9db3cf;
+    padding: 8px 16px;
+}
+
+.button:hover {
+    background-color: #6c8b47;
+    color: white;
+    cursor: pointer;
+}
+
+.comment-date {
+    float: right;
+}
+
+.comment>p {
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 16px;
+    overflow-wrap: break-word;
+}
+
+.editBtns>a {
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+    left: 80%;
+    margin-bottom: 5px;
+}
+
+.editBtns>a:only-child {
+    left: 85%;
+}
+
+.adjust-margin {
+    margin: 1em auto;
+}
+
+#editComment {
+    cursor: text;
+    width: 42em;
+    height: 25px;
+}
+
+#editComment.ng-touched {
+    border: none;
+}

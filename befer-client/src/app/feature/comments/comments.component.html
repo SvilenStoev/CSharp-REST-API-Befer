@@ -1,0 +1,50 @@
+    <article class="new-comment">
+        <form #saveCommentForm="ngForm" class="publication-form adjust-margin" (ngSubmit)="saveHandler(saveCommentForm)">
+            <h3>{{menu.newComment}}</h3>
+            <textarea #content="ngModel" ngModel type="text" name="content" placeholder="{{menu.commentPlaceholder}}"
+                required maxlength="200"></textarea>
+            <ng-container *ngIf="content.touched && content.invalid">
+                <p *ngIf="content.errors?.['required']" class="errorText">{{validations.requiredContent}}</p>
+            </ng-container>
+            <button type="submit" [disabled]="saveCommentForm.invalid || isAddingComment" class="btn save">{{shared.btns.save}}</button>
+        </form>
+    </article>
+
+    <div class="container" id="comments" *ngIf="comments">
+        <section class="details">
+            <h3>{{menu.comments}}</h3>
+            <div class="comments">
+                <ul>
+                    <li class="comment" *ngFor="let comment of comments">
+                        <header>
+                            <b>{{comment.author?.username}}</b>
+                            <span class="comment-date"> 
+                                <b>{{comment.author?.fullName}}&nbsp;{{(comment.createdAt || '') | createdBefore}}</b>
+                                <b *ngIf="comment.updatedAt != comment.createdAt">{{(comment.updatedAt || '') | updatedBefore}}</b>
+                            </span>
+                        </header>
+                        <p *ngIf="comment.objectId != editedCommentId" (mouseenter)="enterEditMode(comment.author?.objectId || '', comment.objectId!, comment.content)">{{comment.content}}</p>
+                        <p *ngIf="isEditMode && comment.objectId == editedCommentId" (mouseleave)="leaveEditMode()">
+                            <input id="editComment" title="Click here to edit your comment!" name="editContent" type="text" value="{{comment.content}}" (click)="inputClicked = true">
+                        </p>
+                        <ng-container *ngIf="comment.author?.objectId == userId">
+                            <ng-container *ngIf="comment.objectId != editedCommentId">
+                                <div class="editBtns">
+                                   <a href="javascript:void(0)" (click)="onDelete(comment.author?.objectId || '', comment.objectId || '')" class="btn delete">{{shared.btns.delete}}</a>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="isEditMode && comment.objectId == editedCommentId">
+                                <div class="editBtns">
+                                    <a href="javascript:void(0)" (click)="onEditSave(comment.author?.objectId || '', comment.objectId || '')" class="btn save">{{shared.btns.save}}</a>
+                                    <a href="javascript:void(0)" (click)="onEditCancel()" class="btn delete">{{shared.btns.cancel}}</a>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </li>
+                </ul>
+                <div *ngIf="comments.length === 0">{{menu.noComments}}</div>
+            </div>
+        </section>
+    </div>
+
+<app-spinner [showLoader]="showLoader"></app-spinner>

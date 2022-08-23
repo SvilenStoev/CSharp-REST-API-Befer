@@ -1,0 +1,8 @@
+<section class="main container">
+    <h1>{{menu.subTitleH1}}</h1>
+    <h2>{{menu.subTitleH2}} <u>Befer</u> Your Life!</h2> 
+    <h3 *ngIf="!isLogged">{{menu.notLogged}} <a routerLink="/user/login">{{menu.login}}</a> {{menu.loginNow}}</h3>
+  </section>
+  <section class="container">
+      <app-posts-home></app-posts-home>
+  </section>

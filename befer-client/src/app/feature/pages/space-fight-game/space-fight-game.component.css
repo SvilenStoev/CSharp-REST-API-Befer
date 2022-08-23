@@ -1,0 +1,480 @@
+/* Main screen */
+.game-view {
+    font-family: 'Consolas';
+    position: relative;
+    width: 100vw;
+    height: 73vh;
+    overflow: hidden;
+}
+
+/* Before starting game */
+.area-warning,
+.area-boss-entering,
+.area-small-screen-warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.area-small-screen-warning {
+    height: 100%;
+    text-align: center;
+}
+
+.area-warning-img,
+.area-boss-entering {
+    margin-left: 100px;
+}
+
+.area-warning-img img {
+    border-radius: 50%;
+    margin: 20px;
+    box-shadow: 1px 1px 16px 11px blue;
+}
+
+.area-boss-entering img {
+    margin: 20px;
+    box-shadow: 1px 1px 12px 10px blue;
+}
+
+.area-warning-text {
+    position: relative;
+    color: white;
+    font-size: 22px;
+    margin-left: 20px;
+    padding: 35px;
+    max-width: 600px;
+    letter-spacing: 2px;
+    line-height: 33px;
+    text-shadow: 3px 3px 3px red;
+    background-color: slategray;
+    border-radius: 50%;
+    box-shadow: 0px 0px 8px 16px slategrey;
+}
+
+.start-screen {
+    background-color: #FFC72C;
+    display: inline-block;
+    width: 420px;
+    height: 80px;
+    border-radius: 40px;
+    border: 2px dotted black;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    cursor: pointer;
+}
+
+.start-screen p {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    text-shadow: 1px 1px 4px blue;
+}
+
+/* Game menu */
+.menu {
+    display: flex;
+    background-color: #232422;
+    opacity: 95%;
+    width: 600px;
+    margin: 94px auto;
+    padding: 28px 0px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 20px darkblue;
+    color: white;
+    z-index: 2;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu-button {
+    background: blue;
+    box-shadow: 0px 0px 13px 15px blue;
+    padding: 10px 25px;
+    border-radius: 50%;
+    margin: 30px;
+    cursor: pointer;
+}
+
+.menu-button-restart {
+    background: darkred;
+    box-shadow: 0px 0px 13px 15px darkred;
+    padding: 10px 25px;
+    border-radius: 50%;
+    margin: 30px;
+    cursor: pointer;
+}
+
+.menu-button-resume {
+    background: darkgreen;
+    box-shadow: 0px 0px 13px 15px darkgreen;
+    padding: 10px 25px;
+    border-radius: 50%;
+    margin: 30px;
+    cursor: pointer;
+}
+
+/* Game controls and settings */
+.settings {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #232422;
+    opacity: 95%;
+    width: 900px;
+    margin: 70px auto;
+    padding: 28px 0px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 20px blue;
+    color: white;
+    z-index: 2;
+}
+
+.settings-title {
+    font-size: 28px;
+}
+
+.settings-controls {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.controls-img {
+    width: 100%;
+    height: 100%;
+}
+
+.settings-bonuses-img {
+    width: 70%;
+    height: 70%;
+}
+
+.settings-controls-text {
+    font-size: 20px;
+    margin: 20px 0px 10px 0px;
+    font-style: italic;
+}
+
+.settings-right h2 {
+    text-align: center;
+}
+
+.settings-bonuses {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-back {
+    border: 3px solid white;
+    height: 80px;
+    background-color: white;
+    width: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.settings-bonuses-el {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-other {
+    margin-bottom: 30px;
+}
+
+.settings-bonuses-img {
+    margin: 0px 0px 0px 20px;
+}
+
+/* Game objects */
+div.spaceship img {
+    width: 100%;
+    height: 100%;
+}
+
+div.spaceship::after {
+    content: '';
+    position: absolute;
+    width: 2200px;
+    border-bottom: 1px dashed red;
+    top: 42px;
+    left: 66px;
+    z-index: -2;
+}
+
+div.alien img {
+    width: 100%;
+    height: 100%;
+}
+
+div.bomb img {
+    width: 100%;
+    height: 100%;
+}
+
+div.double-fire-bonus img {
+    width: 100%;
+    height: 100%;
+}
+
+.points {
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    font-family: 'Consolas';
+    color: white;
+    margin: 5px 0px 15px 0px;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+div.points>p:nth-child(2) {
+    margin: 0px 130px 0px 130px;
+}
+
+/* Game footer */
+.game-footer {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    visibility: hidden;
+    min-height: 55px;
+    font-family: 'Consolas';
+    color: white;
+    margin: 14px 0px 7px 0px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.game-footer-imgs,
+.game-footer-imgs-health {
+    display: flex;
+    align-items: center;
+}
+
+.game-footer-imgs div img,
+.game-footer-imgs-health div img {
+    width: 100%;
+    height: 100%;
+}
+
+.game-footer-imgs div {
+    opacity: 50%;
+    margin-left: 40px;
+    height: 62px;
+}
+
+.game-footer-imgs-health div {
+    margin-left: 100px;
+}
+
+.game-footer-imgs div.game-footer-img-boost-speed img {
+    width: 80%;
+    height: 80%;
+}
+
+.game-footer-imgs div.game-footer-img-boost-speed {
+    position: relative;
+    opacity: 100%;
+    margin-left: 60px;
+    border-left: 2px dashed white;
+    padding-left: 40px;
+}
+
+.game-footer-img-spaceship-health {
+    width: 270px;
+    height: 48px;
+}
+
+.game-footer-img-boss-health {
+    width: 270px;
+    height: 64px;
+}
+
+.game-footer-imgs div.footer-img-active {
+    opacity: 100%;
+    box-shadow: 0px 0px 20px 17px blue;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+.game-footer-text {
+    margin-left: 60px;
+}
+
+.game-footer-level {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.game-footer-img-boss-health {
+    margin-right: 100px;
+}
+
+div.hide::after {
+    display: none;
+}
+
+.user-scores {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: white;
+    height: 120px;
+    width: 1200px;
+    margin: 260px auto;
+    background-color: #232422;
+    opacity: 95%;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 20px darkblue;
+    z-index: 2;
+}
+
+.user-scores div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 25px 20px;
+}
+
+.users-scores-row div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0px;
+    width: 150px;
+}
+
+.user-scores span.pts-info,
+.users-scores-row span.pts-info {
+    font-style: italic;
+    font-size: 13px;
+}
+
+.user-scores div>span:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+.users-scores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    width: 1300px;
+    margin: 80px auto;
+    padding-top: 10px;
+    background-color: #232422;
+    opacity: 95%;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 20px darkblue;
+    z-index: 2;
+}
+
+.users-scores-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px dashed gray;
+}
+
+.users-scores .settings-back {
+    height: 47px;
+    width: 70px;
+    margin: 15px;
+}
+
+.user-scores .settings-back {
+    margin: 18px 0px 0px 10px;
+}
+
+.area-won-view {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 1200px;
+    margin: 64px auto;
+}
+
+.area-won-img img {
+    border-radius: 50%;
+    margin: 20px;
+    box-shadow: 1px 1px 16px 11px blue;
+}
+
+.button-go-scores {
+    position: absolute;
+    top: 260px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 60px;
+    box-shadow: 0px 0px 8px 16px white;
+}
+
+.area-won-view-text {
+    text-align: center;
+}
+
+/* Pulse heart */
+#pulse-heart-boss,
+#pulse-heart-spaceship {
+    color: red;
+    animation-name: stretch;
+    animation-duration: 1.0s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+/* .bossBomb {
+    animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(359deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+} */
+
+@keyframes stretch {
+    0% {
+        transform: scale(.5);
+        color: rgb(255, 118, 118);
+    }
+
+    50% {
+        color: red;
+    }
+
+    100% {
+        transform: scale(1.5);
+        color: darkred;
+    }
+}

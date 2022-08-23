@@ -1,0 +1,27 @@
+<nav>
+    <a routerLink=""><img src="{{menu.logo.url}}" alt="{{menu.logo.name}}" height="50"></a>
+    <ul>
+        <li><a routerLink="">{{menu.home.name}}</a></li>
+        <li><a routerLink="{{menu.allPosts.url}}">{{menu.allPosts.name}}</a></li>
+        <ng-container *ngIf="isLogged">
+            <li><a routerLink="{{menu.myPosts.url}}">{{menu.myPosts.name}}</a></li>
+            <li><a routerLink="{{menu.createPost.url}}">{{menu.createPost.name}}</a></li>
+            <li><a routerLink="{{menu.profile.url}}">{{menu.profile.name}}</a></li>
+            <li><a href="javascript:void(0)" (click)="logoutHandler()">{{menu.logout.name}}</a></li>
+        </ng-container>
+        <ng-container *ngIf="!isLogged">
+            <li><a routerLink="{{menu.login.url}}">{{menu.login.name}}</a></li>
+            <li><a routerLink="{{menu.register.url}}">{{menu.register.name}}</a></li>
+        </ng-container>
+        <li>
+            <ng-container *ngIf="currLang == 'bg'">
+                <a href="javascript:void(0)" (click)="changeLang('en')"><i class="fa-solid fa-globe"></i>&nbsp;EN</a>
+            </ng-container>
+            <ng-container *ngIf="currLang == 'en'">
+                <a href="javascript:void(0)" (click)="changeLang('bg')"><i class="fa-solid fa-globe"></i>&nbsp;BG</a>
+            </ng-container>
+        </li>
+    </ul>
+</nav>
+
+<app-spinner [showLoader]="showLoader"></app-spinner>

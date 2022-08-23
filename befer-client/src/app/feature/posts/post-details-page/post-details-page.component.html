@@ -1,0 +1,51 @@
+<div class="mainLeft">
+    <div *ngIf="!!post" class="container">
+        <section class="details">
+            <h1 class="margin-b20"><i>{{menu.postTitle}}:</i> {{post.title}}</h1>
+            <div class="textCenter pictures">
+                <img class="pictures-img-before" src={{post.beforeImgUrl}} />
+                <img class="befer-logo" src="../../../../assets/images/site/Befer_spinner.png" />
+                <img class="pictures-img-after" src={{post.afterImgUrl}} />
+            </div>
+            <div class="margin-t20">
+                <hr style="width:500px; margin: auto;">
+            </div>
+            <div class="textCenter margin-t20">
+                <ng-container *ngIf="post.description">
+                    <h3>{{menu.postDescription}}</h3>
+                    <p>{{post.description}}</p>
+                </ng-container>
+                <hr style="width:500px; margin: auto;">
+                <b><i><div style="cursor:pointer; display:inline; margin: 20px;" (click)="scrollToSec()">{{'' | generateCommentsMsg: commCount: menu}}</div></i></b>
+                <div class="buttons">
+                    <ng-container *ngIf="isOwner">
+                        <a href="javascript:void(0)" (click)="onDelete()" class="btn delete">{{shared.btns.delete}}</a>
+                        <a class="btn edit" [routerLink]="['/post/edit', postId]">{{shared.btns.edit}}</a>
+                    </ng-container>
+                    <a href="javascript:void(0)" (click)="likeHandler()" *ngIf="!isLiked && !isOwner" class="btn like"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{shared.btns.like}}</a>
+                    <ng-container *ngIf="isLiked && !isOwner">
+                        <a href="javascript:void(0)" (click)="dislikeHandler()" class="btn dislike"><i class="fas fa-thumbs-down"></i> {{shared.btns.dislike}}</a>
+                        <span class="liked">{{menu.postLiked}}</span>
+                    </ng-container>
+                </div>
+            </div>
+        </section>
+    
+        <section class="details">
+            <div class="textCenter">
+                <h3>{{menu.postAuthor}}</h3>
+                <p><b>{{shared.labels.username}}:</b> {{post.owner.username}}</p>
+                <p><b>{{shared.labels.firstLastName}}:</b> {{post.owner.fullName}}</p>
+                <p *ngIf="post.owner.email"><b>{{shared.labels.email}}:</b> {{post.owner.email}}</p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<aside class="asideRight">
+    <ng-container *ngIf="postId">
+        <app-comments (commentsCount)="setCommentsCount($event)" [postId]="postId"></app-comments>
+    </ng-container>
+</aside>
+
+<app-spinner [showLoader]="showLoader"></app-spinner>

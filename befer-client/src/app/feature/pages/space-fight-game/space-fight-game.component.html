@@ -1,0 +1,222 @@
+<div [style.visibility]="gameStarted ? 'visible' : 'hidden'" class="points">
+    <p>{{menu.aliensMissed}} <span class="alients-missed">{{aliensMissed}}</span></p>
+    <p>{{menu.userScores.points}}: <span class="points-current">{{points}}</span></p>
+    <p *ngIf="showHealthBars">{{menu.time}} <span id="remaining-time">05:00</span> {{menu.min}}</p>
+    <p *ngIf="!showHealthBars">{{menu.aliensKilled}} <span class="alients-killed">{{aliensKilled}}</span></p>
+</div>
+<div class="game-view">
+    <article *ngIf="showStartButton" class="start-screen" (click)="warningAndStartGame()">
+        <p>{{menu.startScreen.p1}}</p>
+    </article>
+    <article *ngIf="showAreaWarning" class="area-warning">
+        <div class="area-warning-img"><img src="../../../../assets/images/area-warning.jpg" alt=""></div>
+        <div class="area-warning-text">
+            <p>{{menu.areaWarning.p1}}</p>
+            <p>{{menu.areaWarning.p2}}</p>
+        </div>
+    </article>
+    <article *ngIf="showSmallScreenWarning" class="area-small-screen-warning">
+        <div class="area-warning-text">
+            <p>{{menu.areaScreenWarning.p1}}</p>
+            <p>{{menu.areaScreenWarning.p2}}</p>
+        </div>
+    </article>
+    <article *ngIf="showBossEntering" class="area-boss-entering">
+        <div class="area-boss-entering-img"><img src="../../../../assets/images/boss-entering.jpg" alt=""></div>
+        <div class="area-warning-text">
+            <p>{{menu.areaBossEntering.p1}}</p>
+        </div>
+    </article>
+    <article *ngIf="showSettings" class="settings">
+        <article class="settings-controls">
+            <h2 class="settings-title">{{menu.settings.controls}}</h2>
+            <p class="settings-controls-text">{{menu.settings.movements}}</p>
+            <div><img src="../../../../assets/images/movements.png" alt="Movements Controls" class="controls-img"></div>
+            <p class="settings-controls-text">{{menu.settings.fire}}</p>
+            <div><img src="../../../../assets/images/space.png" alt="Space" class="controls-img"></div>
+            <p class="settings-controls-text">{{menu.settings.boost}}</p>
+            <div><img src="../../../../assets/images/shift.png" alt="Shift" class="controls-img"></div>
+        </article>
+        <div class="settings-right">
+            <article class="settings-other">
+                <h2 class="settings-title">{{menu.settings.otherKeys}}</h2>
+                <p class="settings-controls-text">{{menu.settings.press}} <b>"P"</b> {{menu.settings.pauseGame}}</p>
+                <p class="settings-controls-text">{{menu.settings.press}} <b>"R"</b> {{menu.settings.resumeGame}}</p>
+                <p class="settings-controls-text">{{menu.settings.press}} <b>"M"</b> {{menu.settings.gameMenu}}</p>
+            </article>
+            <article class="settings-bonuses">
+                <h2 class="settings-title">{{menu.settings.bonuses}}</h2>
+                <div class="settings-bonuses-el">
+                    <p class="settings-bonuses-text">{{menu.settings.fireBonus}}</p>
+                    <div><img src="../../../../assets/images/bonus-double-fire.png" alt="Double-Fire"
+                            class="settings-bonuses-img"></div>
+                </div>
+                <div class="settings-bonuses-el">
+                    <p class="settings-bonuses-text">{{menu.settings.aimBonus}}</p>
+                    <div><img src="../../../../assets/images/bonus-aim.png" alt="Aim" class="settings-bonuses-img">
+                    </div>
+                </div>
+                <div class="settings-bonuses-el">
+                    <p class="settings-bonuses-text">{{menu.settings.invisibleBonus}}</p>
+                    <div><img src="../../../../assets/images/bonus-invisible.png" alt="Invisible"
+                            class="settings-bonuses-img"></div>
+                </div>
+            </article>
+        </div>
+        <button *ngIf="showMenu" class="settings-back" (click)="onResume({code: 'KeyR'})">{{menu.settings.goBack}}</button>
+    </article>
+    <ng-container *ngIf="!!usersScores">
+        <article *ngIf="showUsersScores" class="users-scores">
+                <article class="users-scores-row">
+                        <div class="user-scores-columns">
+                            <span>{{menu.userScores.username}}</span>
+                            <span></span>
+                        </div>
+                        <div class="user-scores-columns">
+                            <span>{{menu.userScores.points}}</span>
+                            <span></span>
+                        </div>
+                        <div class="user-scores-columns">
+                            <span>{{menu.userScores.aliensKilled}}</span>
+                            <span class="pts-info">(x100 {{menu.userScores.pts}})</span>
+                        </div>
+                        <div class="user-scores-columns">
+                            <span>{{menu.userScores.aliensMissed}}</span>
+                            <span class="pts-info">(-x500 {{menu.userScores.pts}})</span>
+                        </div>
+                        <div class="user-scores-columns">
+                            <span>{{menu.userScores.remBoost}}</span>
+                            <span class="pts-info">(x5 000 {{menu.userScores.pts}})</span>
+                        </div>
+                        <div class="user-scores-health">
+                            <span>{{menu.userScores.health}}</span>
+                            <span class="pts-info">(x5 {{menu.userScores.pts}})</span>
+                        </div>
+                        <div class="user-scores-columns">
+                            <span>{{menu.userScores.bossTime}}</span>
+                            <span class="pts-info">(x5 000 {{menu.userScores.pts}})</span>
+                        </div>
+                        <div class="user-scores-columns">
+                            <span><b>{{menu.userScores.totalPoints}}</b></span>
+                            <span></span>
+                        </div>
+                </article>
+            <ng-container *ngFor="let scores of usersScores; let i = index">
+                    <article class="users-scores-row">
+                        <div class="user-scores-username">
+                            <span>{{i + 1}}.&nbsp;{{scores.player.username}}</span>
+                        </div>
+                        <div class="user-scores-points">
+                            <span>{{scores.points}}</span>
+                        </div>
+                        <div class="user-scores-aliens">
+                            <span>{{scores.aliensKilled}}</span>
+                        </div>
+                        <div class="user-scores-aliens">
+                            <span>{{scores.aliensMissed}}</span>
+                        </div>
+                        <div class="user-scores-boost">
+                            <span>{{scores.boostRemaining}}%</span>
+                        </div>
+                        <div class="user-scores-health">
+                            <span>{{scores.healthRemaining}}</span>
+                        </div>
+                        <div class="user-scores-time">
+                            <span>{{scores.timeRemaining}}</span>
+                        </div>
+                        <div class="user-scores-points">
+                            <span><b>{{scores.totalPoints}}</b></span>
+                        </div>
+                    </article>
+                </ng-container>
+             <button *ngIf="showUsersScores" class="settings-back" (click)="backToMenu()">{{menu.userScores.menu}}</button>
+        </article>
+    </ng-container>
+    <article *ngIf="showMenu" class="menu">
+        <div class="menu-button" (click)="pauseGame()">
+            <h2 class="menu-button-text">{{menu.menu.controls}}</h2>
+        </div>
+        <!-- <div class="menu-button">
+            <h2 class="menu-button-text">Shop</h2>
+        </div> -->
+        <div class="menu-button" (click)="onMenuScores()">
+            <h2 class="menu-button-text">{{menu.menu.scores}}</h2>
+        </div>
+        <div class="menu-button-resume" (click)="onMenuResume()">
+            <h2 class="menu-button-text">{{menu.menu.resumeGame}}</h2>
+        </div>
+        <div class="menu-button-restart" (click)="restartGame()">
+            <h2 class="menu-button-text">{{menu.menu.restartGame}}</h2>
+        </div>
+    </article>
+    <article *ngIf="showUserScores" class="user-scores">
+        <div class="user-scores-username">
+            <span>{{menu.userScores.username}}</span>
+            <span>{{currUserUsername}}</span>
+            <span></span>
+        </div>
+        <div class="user-scores-points">
+            <span>{{menu.userScores.points}}</span>
+            <span>{{userScores.points}}</span>
+            <span></span>
+        </div>
+        <div class="user-scores-aliens">
+            <span>{{menu.userScores.aliensKilled}}</span>
+            <span>{{userScores.aliensKilled}}</span>
+            <span class="pts-info">(x100 {{menu.userScores.pts}})</span>
+        </div>
+        <div class="user-scores-aliens">
+            <span>{{menu.userScores.aliensMissed}}</span>
+            <span>{{userScores.aliensMissed}}</span>
+            <span class="pts-info">(-x500 {{menu.userScores.pts}})</span>
+        </div>
+        <div class="user-scores-boost">
+            <span>{{menu.userScores.remBoost}}</span>
+            <span>{{userScores.boostRemaining}}%</span>
+            <span class="pts-info">(x5 000 {{menu.userScores.pts}})</span>
+        </div>
+        <div class="user-scores-health">
+            <span>{{menu.userScores.health}}</span>
+            <span>{{userScores.healthRemaining}}</span>
+            <span class="pts-info">(x5 {{menu.userScores.pts}})</span>
+        </div>
+        <div class="user-scores-time">
+            <span>{{menu.userScores.bossTime}}</span>
+            <span>{{userScores.timeRemaining}}</span>
+            <span class="pts-info">(x5 000 {{menu.userScores.pts}})</span>
+        </div>
+        <div class="user-scores-points">
+            <span><b>{{menu.userScores.totalPoints}}</b></span>
+            <span><b>{{userScores.totalPoints}}</b></span>
+            <span></span>
+        </div>
+        <button *ngIf="showUserScores" class="settings-back" (click)="backToMenu()">{{menu.userScores.menu}}</button>
+    </article>
+    <article *ngIf="showWonView" class="area-won-view">
+        <div class="area-won-img"><img src="../../../../assets/images/won-view-img.gif" alt=""></div>
+        <div class="area-warning-text">
+            <p class="area-won-view-text">{{menu.areaWonView.p1}} {{currUserFullName}}!</p>
+            <p class="area-won-view-text">{{menu.areaWonView.p2}}</p>
+            <button class="settings-back button-go-scores" (click)="goToScores()">{{menu.areaWonView.seeScores}}</button>
+        </div>
+    </article>
+</div>
+<div [style.visibility]="gameStarted ? 'visible' : 'hidden'" class="game-footer">
+    <div class="game-footer-imgs" *ngIf="gameStarted">
+        <p class="game-footer-text">{{menu.settings.bonuses}}:</p>
+        <div class="game-footer-img-double"><img src="../../../../assets/images/bonus-double-fire.png"
+                alt="Double-Fire"></div>
+        <div class="game-footer-img-aim"><img src="../../../../assets/images/bonus-aim.png" alt="Aim"></div>
+        <div class="game-footer-img-invisible"><img src="../../../../assets/images/bonus-invisible.png" alt="Invisible">
+        </div>
+        <div class="game-footer-img-boost-speed"><img src="../../../../assets/images/boost-speed.png"
+                alt="Boost-Speed"><span>{{spaceshipBoostSpeed}}%</span></div>
+    </div>
+    <p class="game-footer-level">{{menu.level}}: <span>{{level}}</span></p>
+    <div class="game-footer-imgs-health" *ngIf="gameStarted && showHealthBars">
+        <div class="game-footer-img-spaceship-health"><img src="../../../../assets/images/spaceship-health.png"
+                alt="Boost-Speed"><span><i id="pulse-heart-spaceship" class="fa-solid fa-heart"></i>&nbsp;{{spaceshipHealth}}</span></div>
+        <div class="game-footer-img-boss-health"><img src="../../../../assets/images/boss-health.com.png"
+                alt="Boost-Speed"><span><i id="pulse-heart-boss" class="fa-solid fa-heart"></i>&nbsp;{{bossHealth}}</span></div>
+    </div>
+</div>

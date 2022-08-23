@@ -1,0 +1,268 @@
+{
+  "language": "en",
+  "header": {
+    "logo": {
+      "name": "Befer Logo",
+      "url": "../../../assets/images/site/Befer_logo.png"
+    },
+    "home": {
+      "name": "Home",
+      "url": ""
+    },
+    "login": {
+      "name": "Login",
+      "url": "/user/login"
+    },
+    "register": {
+      "name": "Register",
+      "url": "/user/register"
+    },
+    "profile": {
+      "name": "Profile",
+      "url": "/user/profile"
+    },
+    "logout": {
+      "name": "Logout",
+      "url": "javascript:void(0)"
+    },
+    "allPosts": {
+      "name": "All Posts",
+      "url": "/posts/all"
+    },
+    "myPosts": {
+      "name": "My Posts",
+      "url": "/posts/mine"
+    },
+    "createPost": {
+      "name": "Create Post",
+      "url": "/posts/create"
+    },
+    "messages": {
+      "loggedOutSuccess": "You have successfully logged out.",
+      "somethingWrong": "Something went wrong!"
+    }
+  },
+  "footer": {
+    "content": "All Rights Reserved | Designed and built by ",
+    "ownerName": "Svilen Stoev"
+  },
+  "home": {
+    "title": "Home",
+    "subTitleH1": "The Best Network for Sharing Your \"Before and After\" Photography",
+    "subTitleH2": "Share your progress, renovation or great achievement and",
+    "notLogged": "You are not logged in!",
+    "login": "Login",
+    "loginNow": "now to access all features."
+  },
+  "postsHome": {
+    "postsSortedBy": "Top {0} Posts | Sorted by {1}",
+    "createPost": "Create Post",
+    "top5": "Top 5 posts",
+    "top10": "Top 10 posts",
+    "sortByDate": "Sort by Date",
+    "sortByLikes": "Sort by Likes",
+    "date": "Date",
+    "likes": "Likes",
+    "likesCount": "likes",
+    "like": "like",
+    "seeAfter": "See \"After\""
+  },
+  "postsAll": {
+    "title": "Posts",
+    "my": "My",
+    "all": "All",
+    "postsSortedBy": "Posts | Sorted by {0}",
+    "sortByDate": "Sort by Date",
+    "sortByLikes": "Sort by Likes",
+    "date": "Date",
+    "likes": "Likes",
+    "likesCount": "likes",
+    "like": "like",
+    "details": "Details",
+    "seeAfter": "See \"After\"",
+    "public": "Public",
+    "private": "Private",
+    "firstPage": "First",
+    "lastPage": "Last",
+    "postsCountText": "Showing {0} posts out of {1} in total."
+  },
+  "postModify": {
+    "editTitle": "Edit Post",
+    "createTitle": "Create Post",
+    "title": "Title",
+    "beforeIUrl": "\"Before\" image URL",
+    "afterIUrl": "\"After\" image URL",
+    "description": "Description",
+    "public": "Public",
+    "titlePlaceholder": "Your post's title",
+    "beforeUrlPlaceholder": "Provide your Before Image Url",
+    "afterUrlPlaceholder": "Provide your After Image Url",
+    "descriptionPlaceholder": "Describe your post in the best way",
+    "messages": {
+      "postCreated": "The post is created!",
+      "postEdited": "The post is edited!"
+    }
+  },
+  "postsDetails": {
+    "title": "Post Details",
+    "postTitle": "Post title",
+    "postDescription": "Post Description",
+    "postAuthor": "Post Author",
+    "postLiked": "You liked this post!",
+    "noComments": "There are no comments for this post! Why not write one?",
+    "oneComment": "There is 1 comment for this post. See it!",
+    "manyComments": "There are {0} comments for this post. Check them!",
+    "messages": {
+      "postDeleted": "The post was deleted successfully!",
+      "notAuthorized": "You are not authorized to delete this post!",
+      "confirmDeletion": "Are you sure you want to delete this post?",
+      "canNotLike": "You can not like this post!",
+      "canNotDislike": "You can not dislike this post!"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "userInfo": "User Info",
+    "editUser": "Edit User",
+    "messages": {
+      "notAuthorized": "You are not authorized to edit this user!",
+      "updatedProfile": "The profile is updated!"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "notRegistered": "You don't have a profile?",
+    "joinBefer": "Join Befer now!",
+    "messages": {
+      "loggedInSuccess": "Logged in successfully!"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "alreadyRegistered": "You already have an account? Sign in.",
+    "messages": {
+      "userCreated": "User {0} is created successfully!"
+    }
+  },
+  "comments": {
+    "comments": "Comments",
+    "content": "Content",
+    "newComment": "New comment",
+    "commentPlaceholder": "Type a comment",
+    "noComments": "No comments for this post!",
+    "messages": {
+      "commentAdded": "The comment is added!",
+      "notAuthorized": "You are not authorized to delete this comment!",
+      "confirmDeletion": "Are you sure you want to delete this comment?",
+      "deletedSuccess": "The comment was deleted successfully!"
+    }
+  },
+  "spaceFightGame": {
+    "title": "Space fight game",
+    "time": "Time:",
+    "aliensKilled": "Aliens Killed:",
+    "aliensMissed": "Aliens Missed:",
+    "min": "min",
+    "level": "Level",
+    "areaWarning": {
+      "p1": "Give a star to the project in GitHub!",
+      "p2": "Or my aliens will defeat you!"
+    },
+    "areaScreenWarning": {
+      "p1": "Your screen is too small to play the game!",
+      "p2": "Try playing on computer with screen larger than 1300px width and 800px height."
+    },
+    "areaBossEntering": {
+      "p1": "I am comming for you..."
+    },
+    "startScreen": {
+      "p1": "Start New Space Fight"
+    },
+    "settings": {
+      "controls": "Game Controls",
+      "movements": "Movements:",
+      "fire": "Weapon Fire:",
+      "boost": "Use Spaceship Boost:",
+      "otherKeys": "Other Keys",
+      "press": "Press",
+      "pauseGame": "to pause the game",
+      "resumeGame": "to resume the game",
+      "gameMenu": "for game menu",
+      "bonuses": "Bonuses",
+      "fireBonus": "Fire with both weapons",
+      "aimBonus": "Activate spaceship aim",
+      "invisibleBonus": "Invisible to aliens",
+      "goBack": "Go Back"
+    },
+    "userScores": {
+      "username": "Username",
+      "points": "Points",
+      "aliensKilled": "Aliens killed",
+      "aliensMissed": "Aliens missed",
+      "remBoost": "Remaining Boost",
+      "health": "Health",
+      "bossTime": "Boss Time",
+      "totalPoints": "Total Points",
+      "pts": "pts.",
+      "menu": "Menu"
+    },
+    "menu": {
+      "controls": "Controls",
+      "scores": "Scores",
+      "resumeGame": "Resume Game",
+      "restartGame": "Restart Game"
+    },
+    "areaWonView": {
+      "p1": "Good game,",
+      "p2": "It seems I should write more code for harder game...",
+      "seeScores": "See your scores"
+    },
+    "messages": {
+      "gameOver": "Game Over! {0} points reached.",
+      "gameOverWon": "Great... You have killed the Dev...",
+      "levelUp": "Congratulation! Level {0} reached!",
+      "level7": "Congratulation! You have killed almost all aliens!",
+      "gameOverResume": "The current game is over! You can restart it only."
+    }
+  },
+  "notFoundPage": {
+    "title": "Not Found",
+    "sorry": "Sorry!",
+    "notFoundText1": "Either you aren't cool enough to visit this page or it doesn't exist",
+    "notFoundText2": "...like your social life.",
+    "goBack": "GO BACK HOME"
+  },
+  "validations": {
+    "required": "{0} is required!",
+    "requiredContent": "Content is required!",
+    "minlengthLong": "{0} should be at least {1} symbols! {2} {3} to go.",
+    "minlengthShort": "{0} should be atleast {1} symbols long!",
+    "maxlength": "{0} should be maximum {1} symbols! Please remove {2} {3}.",
+    "whitespace": "{0} should not contains whitespace!",
+    "invalid": "{0} is invalid!",
+    "invalidUrl": "{0} should be valid URL!",
+    "passMissmatch": "The passwords doesn't match!"
+  },
+  "shared": {
+    "btns": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "submit": "Submit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "like": "Like",
+      "dislike": "Dislike"
+    },
+    "labels": {
+      "username": "Username",
+      "email": "Email",
+      "name": "Name",
+      "firstLastName": "First and last name",
+      "password": "Password",
+      "rePass": "Repeat Password"
+    },
+    "symbols": "symbols",
+    "symbol": "symbol",
+    "authGuardLoggedIn": "You should be logged in to access this page!"
+  }
+}

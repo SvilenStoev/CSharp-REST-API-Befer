@@ -1,0 +1,101 @@
+.publications-container {
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  /* flex-basis: auto; */
+}
+
+.publications-container>div {
+  /* flex: 0 0 5em; */
+  flex: 0 1 calc(20% - 6px);
+  /* <-- adjusting for margin */
+  margin: 1.5em;
+  box-shadow: 2px 2px 1.5em 5px rgba(65, 199, 255, 255);
+  background-color: transparent;
+  border-radius: 8px;
+  border: 2px solid black;
+}
+
+.publications-container>div:hover {
+  box-shadow: 2px 2px 1.5em 5px rgba(255, 199, 44, 255);
+}
+
+.publications-container>div>.info {
+  position: absolute;
+  display: block;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 100%;
+  padding: 0.5rem;
+  bottom: 0;
+  background-color: white;
+  box-shadow: 2px 2px 1.5em 2px black;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+
+.pagination {
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.pagination>.btn {
+  font-size: 18px;
+}
+
+.paginationText {
+  text-align: center;
+  margin-bottom: 1.3em;
+}
+
+.aux {
+  margin: 1em;
+}
+
+.pagination-inside button {
+  margin: 0px;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+button.pagination-inside-left {
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+}
+
+button.pagination-inside-right {
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+}
+
+.pagination-inside-right:disabled,
+.pagination-inside-left:disabled {
+  background: #dddddd;
+  cursor: not-allowed;
+}
+
+.pagination-inside-left:hover:enabled,
+.pagination-inside-right:hover:enabled {
+  cursor: pointer;
+  background-color: rgba(255, 199, 44, 255);
+  color: white;
+}
+
+.pagination-inside {
+  display: inline-block;
+  margin: 10px;
+  border-radius: 0.3em;
+  border: 2px solid black;
+  box-shadow: 2px 2px 5px black;
+}
+
+.pagination-inside button.pagination-inside-middle {
+  padding: 8px 4px 8px 4px;
+}
