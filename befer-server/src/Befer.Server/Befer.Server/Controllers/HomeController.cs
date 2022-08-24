@@ -1,17 +1,12 @@
 ﻿namespace Befer.Server.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class HomeController : ControllerBase
+    public class HomeController : ApiController
     {
-        public HomeController()
-        {
-           
-        }
-        
-        public IActionResult Get()
+        [Authorize]
+        public ActionResult Get()
         {
             return Ok("works");
         }

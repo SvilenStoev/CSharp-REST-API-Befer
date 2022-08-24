@@ -1,11 +1,12 @@
 ﻿namespace Befer.Server.Data
 {
+    using Befer.Server.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class ApplicationDbContext : IdentityDbContext
+    public class BeferDbContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BeferDbContext(DbContextOptions<BeferDbContext> options)
             : base(options)
         {
         }
