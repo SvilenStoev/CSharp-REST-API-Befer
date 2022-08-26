@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.userService.login$(data).subscribe({
       next: () => {
-        this.router.navigateByUrl(this.returnUrl);
+        //this.router.navigateByUrl(this.returnUrl);
         notifySuccess(this.menu.messages.loggedInSuccess);
       },
       complete: () => {

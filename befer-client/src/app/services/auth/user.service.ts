@@ -12,7 +12,7 @@ export interface UserEditDto { username: string, fullName: string, email: string
 @Injectable()
 export class UserService {
 
-  userColl: string = '/users';
+  userColl: string = '/identity';
 
   get isLogged() {
     return !!this.storage.getUserData();
@@ -30,12 +30,13 @@ export class UserService {
 
   }
 
-  login$(data: { username: string, password: string }): Observable<IUser> {
+  login$(data: { username: string, password: string }): Observable<any> {
     return this.api
-      .post<IUser>('/login', data)
+      .post<any>(this.userColl + '/login', data)
       .pipe(
         map(response => response.body),
         tap(user => {
+          console.log(user);
           const userData: UserDataDto = {
             username: user.username,
             id: user.objectId,
