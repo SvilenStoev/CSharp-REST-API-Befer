@@ -36,7 +36,6 @@ export class UserService {
       .pipe(
         map(response => response.body),
         tap(user => {
-          console.log(user);
           const userData: UserDataDto = {
             username: user.username,
             id: user.objectId,
@@ -52,20 +51,22 @@ export class UserService {
     return this.api.post<void>('/logout');
   }
 
-  register$(data: CreateUserDto): Observable<IUser> {
+  register$(data: CreateUserDto): Observable<any> {
     return this.api
-      .post<IUser>(this.userColl, data)
+      .post<IUser>(this.userColl + '/register', data)
       .pipe(
-        map(response => response.body),
-        tap(user => {
-          const userData: UserDataDto = {
-            username: user.username,
-            id: user.objectId,
-            token: user.sessionToken
-          };
-
-          this.storage.setUserData(userData);
+        map(response => { 
+          console.log(response)
         })
+        // tap(user => {
+        //   const userData: UserDataDto = {
+        //     username: user.username,
+        //     id: user.objectId,
+        //     token: user.sessionToken
+        //   };
+
+        //   this.storage.setUserData(userData);
+        // })
       );
   }
 

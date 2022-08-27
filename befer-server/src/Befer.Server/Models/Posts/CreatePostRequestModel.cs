@@ -5,8 +5,6 @@
 
     public class CreatePostRequestModel
     {
-        public string Id { get; set; }
-
         [Required(ErrorMessage = "{0} is required.")]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength, ErrorMessage = "{0} must be with a minimum length of {2} and a maximum length of {1}.")]
         public string Title { get; set; }

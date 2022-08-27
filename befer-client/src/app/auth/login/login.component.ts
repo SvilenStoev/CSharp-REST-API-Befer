@@ -1,10 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { whitespaceValidator } from '../util';
 import { userConsts } from 'src/app/shared/constants';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { notifySuccess } from 'src/app/shared/other/notify';
 import { UserService } from 'src/app/services/auth/user.service';
 import { TabTitleService } from 'src/app/services/common/tab-title.service';
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.userService.login$(data).subscribe({
       next: () => {
-        //this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl(this.returnUrl);
         notifySuccess(this.menu.messages.loggedInSuccess);
       },
       complete: () => {

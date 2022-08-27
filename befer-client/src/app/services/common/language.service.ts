@@ -10,7 +10,7 @@ import * as bgJson from "../../../assets/languages/bg.json";
 })
 export class LanguageService {
 
-  langEvent$: EventEmitter<any> = new EventEmitter();
+  langEvent$: EventEmitter<ILanguage> = new EventEmitter();
   currLang: string = this.getStorageLang() || environment.lang.default;
 
   constructor() {
