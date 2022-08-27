@@ -30,6 +30,7 @@
             var user = new User
             {
                 UserName = model.Username,
+                FullName = model.FullName,
                 Email = model.Email,
             };
 
@@ -78,7 +79,6 @@
 
             return new
             {
-
                 Username = user.UserName,
                 ObjectId = user.Id.ToString(),
                 SessionToken = encryptedToken

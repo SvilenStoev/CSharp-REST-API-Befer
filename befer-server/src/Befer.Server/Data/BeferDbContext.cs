@@ -10,5 +10,18 @@
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder
+                .Entity<Post>()
+                .HasOne(p => p.Owner)
+                .WithMany(o => o.Posts)
+                .HasForeignKey(p => p.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+        }
     }
 }
