@@ -1,4 +1,4 @@
-﻿namespace Befer.Server.Models.Identity
+﻿namespace Befer.Server.Features.Identity
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -14,6 +14,6 @@
         public string Email { get; set; }
 
         [Required]
-        public string Password { get; set; }    
+        public string Password { get; set; }
     }
 }

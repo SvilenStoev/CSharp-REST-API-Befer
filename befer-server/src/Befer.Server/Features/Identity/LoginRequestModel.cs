@@ -1,4 +1,4 @@
-﻿namespace Befer.Server.Models.Identity
+﻿namespace Befer.Server.Features.Identity
 {
     using System.ComponentModel.DataAnnotations;
 

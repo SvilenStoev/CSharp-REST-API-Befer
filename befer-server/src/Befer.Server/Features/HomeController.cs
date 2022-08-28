@@ -1,4 +1,4 @@
-﻿namespace Befer.Server.Controllers
+﻿namespace Befer.Server.Features
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

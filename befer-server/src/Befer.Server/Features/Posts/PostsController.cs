@@ -1,9 +1,8 @@
-﻿namespace Befer.Server.Controllers
+﻿namespace Befer.Server.Features.Posts
 {
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
     using Befer.Server.Infrastructure;
-    using Befer.Server.Models.Posts;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +20,7 @@
         [Route(nameof(Create))]
         public async Task<ActionResult> Create(CreatePostRequestModel model)
         {
-            var userId = this.User.GetId();
+            var userId = User.GetId();
 
             var post = new Post
             {
@@ -33,9 +32,9 @@
                 OwnerId = userId
             };
 
-            this.data.Posts.Add(post);
+            data.Posts.Add(post);
 
-            await this.data.SaveChangesAsync();
+            await data.SaveChangesAsync();
 
             return Created(nameof(this.Create), post.Id);
         }
