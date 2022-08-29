@@ -14,6 +14,7 @@ services
     .AddIdentity()
     .AddJwtAuthentication(services.GetAppSettings(builder.Configuration))
     .AddAppServices()
+    .AddSwagger()
     .AddControllers();
 
 var app = builder.Build();
@@ -21,7 +22,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    app
+        .UseDeveloperExceptionPage()
+        .UseSwaggerUI();
 }
 
 app

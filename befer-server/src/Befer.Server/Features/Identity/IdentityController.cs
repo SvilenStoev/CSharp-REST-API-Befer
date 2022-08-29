@@ -28,6 +28,8 @@
 
         [HttpPost]
         [Route(nameof(Register))]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
             var user = new User
@@ -49,6 +51,8 @@
 
         [HttpPost]
         [Route(nameof(Login))]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {
             var user = userManager.FindByNameAsync(model.Username).Result;

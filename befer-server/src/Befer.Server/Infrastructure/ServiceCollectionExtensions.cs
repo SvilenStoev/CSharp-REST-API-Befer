@@ -8,6 +8,7 @@
     using System.Text;
     using Befer.Server.Features.Posts;
     using Befer.Server.Features.Identity;
+    using Microsoft.OpenApi.Models;
 
     public static class ServiceCollectionExtensions
     {
@@ -65,5 +66,17 @@
             => services
                 .AddTransient<IPostService, PostService>()
                 .AddTransient<IIdentityService, IdentityService>();
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+            => services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Befer API",
+                        Version = "v1"
+                    });
+            });
     }
 }
