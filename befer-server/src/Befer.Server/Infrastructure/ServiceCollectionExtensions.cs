@@ -6,9 +6,18 @@
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.IdentityModel.Tokens;
     using System.Text;
+    using Befer.Server.Features.Posts;
+    using Befer.Server.Features.Identity;
 
     public static class ServiceCollectionExtensions
     {
+        public static AppSettings GetAppSettings(this IServiceCollection services, IConfiguration configuration)
+        {
+            var appSettingsConfig = configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsConfig);
+            return appSettingsConfig.Get<AppSettings>();
+        }
+
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services
@@ -51,5 +60,10 @@
 
             return services;
         }
+
+        public static IServiceCollection AddAppServices(this IServiceCollection services)
+            => services
+                .AddTransient<IPostService, PostService>()
+                .AddTransient<IIdentityService, IdentityService>();
     }
 }

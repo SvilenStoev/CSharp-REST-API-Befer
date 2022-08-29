@@ -13,6 +13,7 @@ services
         .UseSqlServer(builder.Configuration.GetDefaultConnectionString()))
     .AddIdentity()
     .AddJwtAuthentication(services.GetAppSettings(builder.Configuration))
+    .AddAppServices()
     .AddControllers();
 
 var app = builder.Build();

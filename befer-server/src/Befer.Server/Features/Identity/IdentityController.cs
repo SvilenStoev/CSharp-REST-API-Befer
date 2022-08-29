@@ -13,13 +13,16 @@
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
+        private readonly IIdentityService identityService;
         private readonly AppSettings appSettings;
 
         public IdentityController(
             UserManager<User> userManager,
+            IIdentityService identityService,
             IOptions<AppSettings> appSettings)
         {
             this.userManager = userManager;
+            this.identityService = identityService;
             this.appSettings = appSettings.Value;
         }
 
@@ -46,7 +49,7 @@
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<ActionResult<object>> Login(LoginRequestModel model)
+        public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {
             var user = userManager.FindByNameAsync(model.Username).Result;
 
@@ -62,28 +65,13 @@
                 return Unauthorized();
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var token = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Name, user.UserName)
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var encryptedToken = tokenHandler.WriteToken(token);
-
-            return new
+            return new LoginResponseModel
             {
                 Username = user.UserName,
                 ObjectId = user.Id,
-                SessionToken = encryptedToken
+                SessionToken = token
             };
 
         }

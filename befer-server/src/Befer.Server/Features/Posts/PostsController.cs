@@ -8,11 +8,11 @@
 
     public class PostsController : ApiController
     {
-        private readonly BeferDbContext data;
+        private readonly IPostService postService;
 
-        public PostsController(BeferDbContext data)
+        public PostsController(IPostService postService)
         {
-            this.data = data;
+            this.postService = postService;
         }
 
         [Authorize]
@@ -22,21 +22,15 @@
         {
             var userId = User.GetId();
 
-            var post = new Post
-            {
-                Title = model.Title,
-                AfterImgUrl = model.AfterImgUrl,
-                BeforeImgUrl = model.BeforeImgUrl,
-                Description = model.Description,
-                IsPublic = model.IsPublic,
-                OwnerId = userId
-            };
+            string postId = await this.postService.Create(
+                model.Title, 
+                model.AfterImgUrl,
+                model.BeforeImgUrl, 
+                model.Description, 
+                model.IsPublic, 
+                userId);
 
-            data.Posts.Add(post);
-
-            await data.SaveChangesAsync();
-
-            return Created(nameof(this.Create), post.Id);
+            return Created(nameof(this.Create), postId);
         }
     }
 }
