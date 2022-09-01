@@ -60,6 +60,7 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
 
     this.postService.loadPostById$(postId).subscribe({
       next: (data) => {
+        console.log(data);
         this.post = data as IPost;
         this.isOwner = this.post.owner.objectId == this.userId;
         this.isLiked = this.post.likes.includes(this.userId);

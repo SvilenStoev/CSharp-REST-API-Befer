@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { IPost } from '../../interfaces';
 import { ApiService } from '../api.service';
-import { UserService } from '../auth/user.service';
-import { addOwner, createPointer } from '../../auth/util';
+import { createPointer } from '../../auth/util';
 import { LanguageService } from '../common/language.service';
 
 export interface CreatePostDto {
@@ -28,7 +27,7 @@ export interface CreateOwnerDto {
 @Injectable()
 export class PostService {
 
-  postColl: string = '/classes/Publication';
+  postColl: string = '/posts';
   menuPostsHome: any = this.langService.get().postsHome;
   onlyPublic: string = JSON.stringify({
     isPublic: true
@@ -36,7 +35,6 @@ export class PostService {
 
   constructor(
     private api: ApiService,
-    private userService: UserService,
     private langService: LanguageService) { }
 
   getAllPostsCount$(): Observable<any> {
@@ -68,18 +66,14 @@ export class PostService {
   }
 
   loadPostById$(id: string): Observable<any> {
-    return this.api.get(`${this.postColl}/${id}?include=owner`);
+    return this.api.get(`${this.postColl + '/details'}/${id}`);
   }
 
   createPost$(postData: CreatePostDto): Observable<IPost> {
-    const userId = this.userService.userId;
-
-    addOwner(postData, userId);
-
-    return this.api
-      .post<IPost>(this.postColl, postData)
-      .pipe(
-        map(response => response.body));
+     return this.api
+       .post<IPost>(this.postColl + '/create', postData)
+       .pipe(
+         map(response => response.body));
   }
 
   editPost$(postData: CreatePostDto, id: string): Observable<IPost> {

@@ -23,14 +23,27 @@
             var userId = User.GetId();
 
             string postId = await this.postService.Create(
-                model.Title, 
+                model.Title,
                 model.AfterImgUrl,
-                model.BeforeImgUrl, 
-                model.Description, 
-                model.IsPublic, 
+                model.BeforeImgUrl,
+                model.Description,
+                model.IsPublic,
                 userId);
 
-            return Created(nameof(this.Create), postId);
+            var response = new CreatePostResponseModel
+            {
+                ObjectId = postId
+            };
+
+            return Created(nameof(this.Create), response);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("details/{id}")]
+        public async Task<ActionResult<GetPostResponseModel>> Details(string id)
+        {
+            return this.postService.Get(id);
         }
     }
 }
