@@ -1,10 +1,11 @@
 ﻿namespace Befer.Server.Features.Posts
 {
     using Befer.Server.Features.Posts.Models;
-    using Befer.Server.Infrastructure;
+    using Befer.Server.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class PostsController : ApiController
     {
         private readonly IPostService postService;
@@ -14,7 +15,6 @@
             this.postService = postService;
         }
 
-        [Authorize]
         [HttpPost]
         [Route(nameof(Create))]
         public async Task<ActionResult> Create(CreatePostRequestModel model)
@@ -37,33 +37,27 @@
             return Created(nameof(this.Create), response);
         }
 
-        [Authorize]
         [HttpGet]
         [Route("details/{id}")]
-        public async Task<ActionResult<GetPostResponseModel>> Details(string id)
-        {
-            return await this.postService.Get(id);
-        }
+        public async Task<ActionResult<PostDetailsServiceModel>> Details(string id)
+         => await this.postService.Details(id);
 
-        [Authorize]
         [HttpGet]
         [Route(nameof(GetAll))]
-        public async Task<IEnumerable<PostListResponseModel>> GetAll(string order, int skip)
+        public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip)
         {
             return await this.postService.GetAll(order, skip);
         }
 
-        [Authorize]
         [HttpGet]
         [Route(nameof(GetMine))]
-        public async Task<IEnumerable<PostListResponseModel>> GetMine(string order, int skip)
+        public async Task<IEnumerable<PostListingServiceModel>> GetMine(string order, int skip)
         {
             var userId = User.GetId();
 
             return await this.postService.GetMine(order, skip, userId);
         }
 
-        [Authorize]
         [HttpGet]
         [Route(nameof(AllPostsCount))]
         public async Task<ActionResult<int>> AllPostsCount()
@@ -71,7 +65,6 @@
             return await this.postService.AllPostsCount();
         }
 
-        [Authorize]
         [HttpGet]
         [Route(nameof(UserPostsCount))]
         public async Task<ActionResult<int>> UserPostsCount()

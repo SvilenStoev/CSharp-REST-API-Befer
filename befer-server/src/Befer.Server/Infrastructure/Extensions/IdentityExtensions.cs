@@ -1,4 +1,4 @@
-﻿namespace Befer.Server.Infrastructure
+﻿namespace Befer.Server.Infrastructure.Extensions
 {
     using System.Security.Claims;
 

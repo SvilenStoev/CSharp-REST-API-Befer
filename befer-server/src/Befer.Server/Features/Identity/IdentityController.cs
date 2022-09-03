@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
+    using Befer.Server.Features.Identity.Models;
 
     public class IdentityController : ApiController
     {

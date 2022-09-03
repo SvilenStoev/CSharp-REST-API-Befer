@@ -4,6 +4,7 @@
     using Befer.Server.Data.Models;
     using Befer.Server.Features.Posts.Models;
     using Microsoft.EntityFrameworkCore;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using static FeaturesConstants.Post;
@@ -39,20 +40,20 @@
             return post.Id;
         }
 
-        public async Task<GetPostResponseModel> Get(string id)
+        public async Task<PostDetailsServiceModel> Details(string id)
             => await this.data
                     .Posts
                     .Where(p => p.Id == id)
-                    .Select(p => new GetPostResponseModel
+                    .Select(p => new PostDetailsServiceModel
                     {
-                        Id = p.Id,
+                        ObjectId = p.Id,
                         Title = p.Title,
                         AfterImgUrl = p.AfterImgUrl,
                         BeforeImgUrl = p.BeforeImgUrl,
                         Description = p.Description,
                         IsPublic = p.IsPublic,
                         OwnerId = p.Owner.Id,
-                        Owner = new PostOwnerResponseModel
+                        Owner = new PostOwnerDetailsServiceModel
                         {
                             ObjectId = p.Owner.Id,
                             Email = p.Owner.Email,
@@ -62,12 +63,12 @@
                     })
                     .FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<PostListResponseModel>> GetAll(string order, int skip)
+        public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip)
         {
             return await this.data
                 .Posts
                 .Where(p => p.IsPublic == true)
-                .Select(p => new PostListResponseModel
+                .Select(p => new PostListingServiceModel
                 {
                     ObjectId = p.Id,
                     Title = p.Title,
@@ -81,12 +82,12 @@
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<PostListResponseModel>> GetMine(string order, int skip, string userId)
+        public async Task<IEnumerable<PostListingServiceModel>> GetMine(string order, int skip, string userId)
         {
             return await this.data
                 .Posts
                 .Where(p => p.Owner.Id == userId)
-                .Select(p => new PostListResponseModel
+                .Select(p => new PostListingServiceModel
                 {
                     ObjectId = p.Id,
                     Title = p.Title,

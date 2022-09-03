@@ -1,4 +1,4 @@
-﻿namespace Befer.Server.Infrastructure
+﻿namespace Befer.Server.Infrastructure.Extensions
 {
     using Befer.Server.Data.Models;
     using Befer.Server.Data;
@@ -9,6 +9,7 @@
     using Befer.Server.Features.Posts;
     using Befer.Server.Features.Identity;
     using Microsoft.OpenApi.Models;
+    using Befer.Server.Infrastructure.Filters;
 
     public static class ServiceCollectionExtensions
     {
@@ -78,5 +79,9 @@
                         Version = "v1"
                     });
             });
+
+        public static void AddApiControllers(this IServiceCollection services)
+            => services
+                .AddControllers(options => options.Filters.Add<ModelOrNotFoundActionFilter>());
     }
 }

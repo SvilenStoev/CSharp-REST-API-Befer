@@ -13,11 +13,11 @@
             bool isPublic,
             string userId);
 
-        public Task<GetPostResponseModel> Get(string id);
+        public Task<PostDetailsServiceModel> Details(string id);
 
-        public Task<IEnumerable<PostListResponseModel>> GetAll(string order, int skip);
+        public Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip);
 
-        public Task<IEnumerable<PostListResponseModel>> GetMine(string order, int skip, string userId);
+        public Task<IEnumerable<PostListingServiceModel>> GetMine(string order, int skip, string userId);
 
         public Task<int> AllPostsCount();
 

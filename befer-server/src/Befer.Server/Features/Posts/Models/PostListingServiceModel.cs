@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class PostListResponseModel
+    public class PostListingServiceModel
     {
         public string ObjectId { get; set; }
 

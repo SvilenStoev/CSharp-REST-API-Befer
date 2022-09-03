@@ -1,4 +1,6 @@
-﻿namespace Befer.Server.Infrastructure
+﻿using Befer.Server.Infrastructure.Extensions;
+
+namespace Befer.Server.Infrastructure.Extensions
 {
     using Befer.Server.Data;
     using Microsoft.EntityFrameworkCore;

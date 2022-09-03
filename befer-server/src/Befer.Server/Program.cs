@@ -1,5 +1,6 @@
 using Befer.Server.Data;
-using Befer.Server.Infrastructure;
+using Befer.Server.Infrastructure.Extensions;
+using Befer.Server.Infrastructure.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,7 @@ services
     .AddJwtAuthentication(services.GetAppSettings(builder.Configuration))
     .AddAppServices()
     .AddSwagger()
-    .AddControllers();
+    .AddApiControllers();
 
 var app = builder.Build();
 

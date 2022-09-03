@@ -1,11 +1,8 @@
 ﻿namespace Befer.Server.Features.Posts.Models
 {
-    using Befer.Server.Data.Models;
-    using System.ComponentModel.DataAnnotations;
-
-    public class GetPostResponseModel
+    public class PostDetailsServiceModel
     {
-        public string Id { get; set; }
+        public string ObjectId { get; set; }
 
         public string Title { get; set; }
 
@@ -19,6 +16,6 @@
 
         public string OwnerId { get; set; }
 
-        public PostOwnerResponseModel Owner { get; set; }
+        public PostOwnerDetailsServiceModel Owner { get; set; }
     }
 }

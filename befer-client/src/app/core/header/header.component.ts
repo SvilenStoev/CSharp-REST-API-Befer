@@ -49,8 +49,7 @@ export class HeaderComponent {
         this.isLoggingOut = false;
         this.showLoader = false;
 
-        notifySuccess(this.menu.messages.somethingWrong);
-
+        this.storage.clearUserData();
         notifyErr(err.message);
       }
     });

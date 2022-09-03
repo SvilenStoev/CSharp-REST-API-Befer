@@ -1,6 +1,6 @@
 ﻿namespace Befer.Server.Features.Posts.Models
 {
-    public class PostOwnerResponseModel
+    public class PostOwnerDetailsServiceModel
     {
         public string ObjectId { get; set; }
 
