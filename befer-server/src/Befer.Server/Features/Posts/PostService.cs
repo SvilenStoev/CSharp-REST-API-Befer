@@ -2,8 +2,11 @@
 {
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
+    using Befer.Server.Features.Posts.Models;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
+
+    using static FeaturesConstants.Post;
 
     public class PostService : IPostService
     {
@@ -58,6 +61,44 @@
                         }
                     })
                     .FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<PostListResponseModel>> GetAll(string order, int skip)
+        {
+            return await this.data
+                .Posts
+                .Where(p => p.IsPublic == true)
+                .Select(p => new PostListResponseModel
+                {
+                    ObjectId = p.Id,
+                    Title = p.Title,
+                    BeforeImgUrl = p.BeforeImgUrl,
+                    CreatedAt = p.CreatedAt,
+                    IsPublic = p.IsPublic
+                })
+                .OrderByDescending(p => p.CreatedAt)
+                .Skip(skip)
+                .Take(PostsPerPage)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<PostListResponseModel>> GetMine(string order, int skip, string userId)
+        {
+            return await this.data
+                .Posts
+                .Where(p => p.Owner.Id == userId)
+                .Select(p => new PostListResponseModel
+                {
+                    ObjectId = p.Id,
+                    Title = p.Title,
+                    BeforeImgUrl = p.BeforeImgUrl,
+                    CreatedAt = p.CreatedAt,
+                    IsPublic = p.IsPublic
+                })
+                .OrderByDescending(p => p.CreatedAt)
+                .Skip(skip)
+                .Take(PostsPerPage)
+                .ToListAsync();
+        }
 
         public async Task<int> AllPostsCount()
          => await this.data

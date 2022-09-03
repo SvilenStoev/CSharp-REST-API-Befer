@@ -1,5 +1,6 @@
 ﻿namespace Befer.Server.Features.Posts
 {
+    using Befer.Server.Features.Posts.Models;
     using Befer.Server.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,24 @@
         public async Task<ActionResult<GetPostResponseModel>> Details(string id)
         {
             return await this.postService.Get(id);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route(nameof(GetAll))]
+        public async Task<IEnumerable<PostListResponseModel>> GetAll(string order, int skip)
+        {
+            return await this.postService.GetAll(order, skip);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route(nameof(GetMine))]
+        public async Task<IEnumerable<PostListResponseModel>> GetMine(string order, int skip)
+        {
+            var userId = User.GetId();
+
+            return await this.postService.GetMine(order, skip, userId);
         }
 
         [Authorize]

@@ -1,4 +1,4 @@
-﻿namespace Befer.Server.Features.Posts
+﻿namespace Befer.Server.Features.Posts.Models
 {
     using Befer.Server.Data.Models;
     using System.ComponentModel.DataAnnotations;

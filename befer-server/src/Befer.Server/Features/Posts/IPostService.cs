@@ -1,6 +1,7 @@
 ﻿namespace Befer.Server.Features.Posts
 {
     using Befer.Server.Data.Models;
+    using Befer.Server.Features.Posts.Models;
 
     public interface IPostService
     {
@@ -13,6 +14,10 @@
             string userId);
 
         public Task<GetPostResponseModel> Get(string id);
+
+        public Task<IEnumerable<PostListResponseModel>> GetAll(string order, int skip);
+
+        public Task<IEnumerable<PostListResponseModel>> GetMine(string order, int skip, string userId);
 
         public Task<int> AllPostsCount();
 

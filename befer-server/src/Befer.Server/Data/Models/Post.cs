@@ -7,6 +7,8 @@
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
         [Required]
         [MaxLength(TitleMaxLength)]
         public string Title { get; set; }

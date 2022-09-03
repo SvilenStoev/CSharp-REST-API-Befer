@@ -45,20 +45,16 @@ export class PostService {
     return this.api.get(`${this.postColl + '/userPostsCount'}`);
   }
 
-  loadAllPosts$(limit: number, sortType: string, skipPosts: number): Observable<any> {
+  loadAllPosts$(sortType: string, skipPosts: number): Observable<any> {
     sortType = this.getSortType(sortType);
 
-    return this.api.get(`${this.postColl}/?where=${this.onlyPublic}&order=${sortType}&skip=${skipPosts}${limit ? `&limit=${limit}` : ''}`);
+    return this.api.get(`${this.postColl + '/getAll'}/?order=${sortType}&skip=${skipPosts}`);
   }
 
-  loadMyPosts$(limit: number, userId: string, sortType: string, skipPosts: number): Observable<any> {
-    const pointerQuery = JSON.stringify({
-      "owner": createPointer('_User', userId)
-    });
-
+  loadMyPosts$(sortType: string, skipPosts: number): Observable<any> {
     sortType = this.getSortType(sortType);
 
-    return this.api.get(`${this.postColl}/?where=${pointerQuery}&order=${sortType}&skip=${skipPosts}${limit ? `&limit=${limit}` : ''}`);
+    return this.api.get(`${this.postColl + '/getMine'}/?order=${sortType}&skip=${skipPosts}`);
   }
 
   loadPostById$(id: string): Observable<any> {

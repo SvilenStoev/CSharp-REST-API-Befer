@@ -36,7 +36,6 @@ export class PostsAllComponent implements OnInit, OnDestroy {
   constructor(
     private postService: PostService,
     private router: Router,
-    private userService: UserService,
     private titleService: TabTitleService,
     private langService: LanguageService) {
     this.isMyPosts = this.router.url == '/posts/mine';
@@ -75,12 +74,12 @@ export class PostsAllComponent implements OnInit, OnDestroy {
         }
       });
 
-      this.postService.loadAllPosts$(this.limitPosts, this.sortType, this.skipPosts).subscribe({
-        next: (data) => {
+      this.postService.loadAllPosts$(this.sortType, this.skipPosts).subscribe({
+        next: (posts) => {
           if (this.sortType == this.menu.date) {
-            this.sortByDate(data.results);
+            this.sortByDate(posts);
           } else {
-            this.sortByLikes(data.results);
+            this.sortByLikes(posts);
           }
         },
         complete: () => {
@@ -91,8 +90,6 @@ export class PostsAllComponent implements OnInit, OnDestroy {
         }
       });
     } else if (this.isMyPosts) {
-      const userId = this.userService.userId;
-
       this.postService.getMyPostsCount$().subscribe({
         next: (count) => {
           this.allPostsCount = count;
@@ -100,12 +97,12 @@ export class PostsAllComponent implements OnInit, OnDestroy {
         }
       });
 
-      this.postService.loadMyPosts$(this.limitPosts, userId, this.sortType, this.skipPosts).subscribe({
-        next: (data) => {
+      this.postService.loadMyPosts$(this.sortType, this.skipPosts).subscribe({
+        next: (posts) => {
           if (this.sortType == this.menu.date) {
-            this.sortByDate(data.results);
+            this.sortByDate(posts);
           } else {
-            this.sortByLikes(data.results);
+            this.sortByLikes(posts);
           }
         },
         complete: () => {

@@ -48,12 +48,12 @@ export class PostsHomeComponent implements OnInit {
     this.showLoader = true;
     this.limitPosts = limit;
 
-    this.postService.loadAllPosts$(this.limitPosts, this.sortType, 0).subscribe({
-      next: (data) => {
+    this.postService.loadAllPosts$(this.sortType, 0).subscribe({
+      next: (posts) => {
         if (this.sortType == this.menu.date) {
-          this.sortByDate(data.results);
+          this.sortByDate(posts);
         } else {
-          this.sortByLikes(data.results);
+          this.sortByLikes(posts);
         }
       },
       complete: () => {
