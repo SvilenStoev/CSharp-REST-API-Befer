@@ -37,16 +37,12 @@ export class PostService {
     private api: ApiService,
     private langService: LanguageService) { }
 
-  getAllPostsCount$(): Observable<any> {
-    return this.api.get(`${this.postColl}/?where=${this.onlyPublic}&count=1`);
+  getAllPublicPostsCount$(): Observable<any> {
+    return this.api.get(`${this.postColl + '/allPostsCount'}`);
   }
 
-  getMyPostsCount$(userId: string): Observable<any> {
-    const pointerQuery = JSON.stringify({
-      "owner": createPointer('_User', userId)
-    });
-
-    return this.api.get(`${this.postColl}/?where=${pointerQuery}&count=1`);
+  getMyPostsCount$(): Observable<any> {
+    return this.api.get(`${this.postColl + '/userPostsCount'}`);
   }
 
   loadAllPosts$(limit: number, sortType: string, skipPosts: number): Observable<any> {

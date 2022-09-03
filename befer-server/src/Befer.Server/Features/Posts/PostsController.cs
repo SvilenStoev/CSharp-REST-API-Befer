@@ -1,7 +1,5 @@
 ﻿namespace Befer.Server.Features.Posts
 {
-    using Befer.Server.Data;
-    using Befer.Server.Data.Models;
     using Befer.Server.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -43,7 +41,25 @@
         [Route("details/{id}")]
         public async Task<ActionResult<GetPostResponseModel>> Details(string id)
         {
-            return this.postService.Get(id);
+            return await this.postService.Get(id);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route(nameof(AllPostsCount))]
+        public async Task<ActionResult<int>> AllPostsCount()
+        {
+            return await this.postService.AllPostsCount();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route(nameof(UserPostsCount))]
+        public async Task<ActionResult<int>> UserPostsCount()
+        {
+            var userId = User.GetId();
+
+            return await this.postService.UserPostsCount(userId);
         }
     }
 }

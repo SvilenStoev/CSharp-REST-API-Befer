@@ -2,6 +2,7 @@
 {
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
+    using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
 
     public class PostService : IPostService
@@ -35,9 +36,8 @@
             return post.Id;
         }
 
-        public GetPostResponseModel Get(string id)
-        {
-            return this.data
+        public async Task<GetPostResponseModel> Get(string id)
+            => await this.data
                     .Posts
                     .Where(p => p.Id == id)
                     .Select(p => new GetPostResponseModel
@@ -57,8 +57,18 @@
                             Username = p.Owner.UserName
                         }
                     })
-                    .ToList()
-                    .FirstOrDefault();
-        }
+                    .FirstOrDefaultAsync();
+
+        public async Task<int> AllPostsCount()
+         => await this.data
+                .Posts
+                .Where(p => p.IsPublic == true)
+                .CountAsync();
+
+        public async Task<int> UserPostsCount(string userId)
+          => await this.data
+                 .Posts
+                 .Where(p => p.OwnerId == userId)
+                 .CountAsync();
     }
 }

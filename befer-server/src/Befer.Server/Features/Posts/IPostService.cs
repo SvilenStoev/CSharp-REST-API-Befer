@@ -12,6 +12,10 @@
             bool isPublic,
             string userId);
 
-        public GetPostResponseModel Get(string id);
+        public Task<GetPostResponseModel> Get(string id);
+
+        public Task<int> AllPostsCount();
+
+        public Task<int> UserPostsCount(string userId);
     }
 }

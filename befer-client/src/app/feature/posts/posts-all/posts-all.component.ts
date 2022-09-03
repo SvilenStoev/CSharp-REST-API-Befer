@@ -68,9 +68,9 @@ export class PostsAllComponent implements OnInit, OnDestroy {
     this.showLoader = true;
 
     if (!this.isMyPosts) {
-      this.postService.getAllPostsCount$().subscribe({
-        next: (data) => {
-          this.allPostsCount = data.count;
+      this.postService.getAllPublicPostsCount$().subscribe({
+        next: (count) => {
+          this.allPostsCount = count;
           this.lastPage = Math.ceil(this.allPostsCount / this.limitPosts);
         }
       });
@@ -93,9 +93,9 @@ export class PostsAllComponent implements OnInit, OnDestroy {
     } else if (this.isMyPosts) {
       const userId = this.userService.userId;
 
-      this.postService.getMyPostsCount$(userId).subscribe({
-        next: (data) => {
-          this.allPostsCount = data.count;
+      this.postService.getMyPostsCount$().subscribe({
+        next: (count) => {
+          this.allPostsCount = count;
           this.lastPage = Math.ceil(this.allPostsCount / this.limitPosts);
         }
       });
