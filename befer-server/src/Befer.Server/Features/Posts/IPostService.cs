@@ -13,6 +13,8 @@
             bool isPublic,
             string userId);
 
+        public Task<bool> Update(UpdatePostRequestModel model, string userId, string id);
+
         public Task<PostDetailsServiceModel> Details(string id);
 
         public Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip);

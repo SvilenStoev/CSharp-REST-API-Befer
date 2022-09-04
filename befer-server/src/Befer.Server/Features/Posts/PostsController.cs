@@ -16,7 +16,6 @@
         }
 
         [HttpPost]
-        [Route(nameof(Create))]
         public async Task<ActionResult> Create(CreatePostRequestModel model)
         {
             var userId = User.GetId();
@@ -37,8 +36,24 @@
             return Created(nameof(this.Create), response);
         }
 
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<ActionResult> Update([FromRoute] string id, [FromBody] UpdatePostRequestModel model)
+        {
+            var userId = User.GetId();
+
+            var updated = await this.postService.Update(model, userId, id);
+
+            if (!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
         [HttpGet]
-        [Route("details/{id}")]
+        [Route("Details/{id}")]
         public async Task<ActionResult<PostDetailsServiceModel>> Details(string id)
          => await this.postService.Details(id);
 
@@ -48,6 +63,7 @@
         {
             return await this.postService.GetAll(order, skip);
         }
+
 
         [HttpGet]
         [Route(nameof(GetMine))]

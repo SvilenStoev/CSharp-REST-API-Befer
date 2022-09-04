@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 
 import { IPost } from '../../interfaces';
 import { ApiService } from '../api.service';
-import { createPointer } from '../../auth/util';
 import { LanguageService } from '../common/language.service';
 
 export interface CreatePostDto {
@@ -12,16 +11,6 @@ export interface CreatePostDto {
   description: string,
   title: string,
   isPublic: boolean,
-  owner: CreateOwnerDto
-}
-
-export interface CreateOwnerDto {
-  __type: string,
-  className: string,
-  objectId: string,
-  fullName: string,
-  username: string,
-  email: string
 }
 
 @Injectable()
@@ -63,16 +52,13 @@ export class PostService {
 
   createPost$(postData: CreatePostDto): Observable<IPost> {
      return this.api
-       .post<IPost>(this.postColl + '/create', postData)
+       .post<IPost>(this.postColl, postData)
        .pipe(
          map(response => response.body));
   }
 
   editPost$(postData: CreatePostDto, id: string): Observable<IPost> {
-    return this.api
-      .put<IPost>(`${this.postColl}/${id}`, postData)
-      .pipe(
-        map(response => response.body));
+    return this.api.put<IPost>(`${this.postColl}/${id}`, postData);
   }
 
   deletePost$(id: string): Observable<any> {

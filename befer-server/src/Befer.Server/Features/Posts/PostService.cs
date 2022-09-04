@@ -40,6 +40,30 @@
             return post.Id;
         }
 
+        public async Task<bool> Update(UpdatePostRequestModel model, string userId, string id)
+        {
+            var post = await this.data
+                            .Posts
+                            .Where(p => p.Id == id && p.OwnerId == userId)
+                            .FirstOrDefaultAsync();
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            post.Description = model.Description;
+            post.AfterImgUrl = model.AfterImgUrl;
+            post.BeforeImgUrl = model.BeforeImgUrl;
+            post.Title = model.Title;
+            post.IsPublic = model.IsPublic;
+            post.UpdatedAt = DateTime.Now;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<PostDetailsServiceModel> Details(string id)
             => await this.data
                     .Posts
@@ -65,6 +89,8 @@
 
         public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip)
         {
+            //TODO check the order and order the posts according to the provided type
+
             return await this.data
                 .Posts
                 .Where(p => p.IsPublic == true)
@@ -84,6 +110,8 @@
 
         public async Task<IEnumerable<PostListingServiceModel>> GetMine(string order, int skip, string userId)
         {
+            //TODO check the order and order the posts according to the provided type
+
             return await this.data
                 .Posts
                 .Where(p => p.Owner.Id == userId)
