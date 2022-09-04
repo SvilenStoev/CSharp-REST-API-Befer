@@ -5,6 +5,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static Infrastructure.WebConstants;
+
     [Authorize]
     public class PostsController : ApiController
     {
@@ -37,7 +39,7 @@
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route(Id)]
         public async Task<ActionResult> Update([FromRoute] string id, [FromBody] UpdatePostRequestModel model)
         {
             var userId = User.GetId();
@@ -45,6 +47,22 @@
             var updated = await this.postService.Update(model, userId, id);
 
             if (!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route(Id)]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var userId = User.GetId();
+
+            var deleted = await this.postService.Delete(id, userId);
+
+            if (!deleted)
             {
                 return BadRequest();
             }

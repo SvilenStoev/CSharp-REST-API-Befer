@@ -84,7 +84,7 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
 
     if (choise) {
       this.showLoader = true;
-
+      console.log(this.postId);
       this.postService.deletePost$(this.postId).subscribe({
         next: () => {
           notifySuccess(this.menu.messages.postDeleted);

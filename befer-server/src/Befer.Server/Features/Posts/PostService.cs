@@ -3,6 +3,7 @@
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
     using Befer.Server.Features.Posts.Models;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
@@ -42,10 +43,7 @@
 
         public async Task<bool> Update(UpdatePostRequestModel model, string userId, string id)
         {
-            var post = await this.data
-                            .Posts
-                            .Where(p => p.Id == id && p.OwnerId == userId)
-                            .FirstOrDefaultAsync();
+            var post = await this.GetByIdAndByUserId(id, userId);
 
             if (post == null)
             {
@@ -58,6 +56,22 @@
             post.Title = model.Title;
             post.IsPublic = model.IsPublic;
             post.UpdatedAt = DateTime.Now;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> Delete(string id, string userId)
+        {
+            var post = await this.GetByIdAndByUserId(id, userId);
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            this.data.Posts.Remove(post);
 
             await this.data.SaveChangesAsync();
 
@@ -140,5 +154,11 @@
                  .Posts
                  .Where(p => p.OwnerId == userId)
                  .CountAsync();
+
+        private async Task<Post> GetByIdAndByUserId(string id, string userId)
+            => await this.data
+                            .Posts
+                            .Where(p => p.Id == id && p.OwnerId == userId)
+                            .FirstOrDefaultAsync(); 
     }
 }

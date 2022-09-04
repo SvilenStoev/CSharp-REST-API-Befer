@@ -51,7 +51,7 @@ export class CommentsComponent implements OnInit {
       this.validations = langJson.validations;
     });
 
-    this.loadComments(this.limitComments);
+    //this.loadComments(this.limitComments);
   }
 
   loadComments(limit: number) {

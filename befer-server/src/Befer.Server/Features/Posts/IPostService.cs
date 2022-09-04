@@ -2,6 +2,7 @@
 {
     using Befer.Server.Data.Models;
     using Befer.Server.Features.Posts.Models;
+    using Microsoft.AspNetCore.Mvc;
 
     public interface IPostService
     {
@@ -14,6 +15,8 @@
             string userId);
 
         public Task<bool> Update(UpdatePostRequestModel model, string userId, string id);
+
+        public Task<bool> Delete(string id, string userId);
 
         public Task<PostDetailsServiceModel> Details(string id);
 
