@@ -51,15 +51,16 @@ export class CommentsComponent implements OnInit {
       this.validations = langJson.validations;
     });
 
-    //this.loadComments(this.limitComments);
+    this.loadComments(this.limitComments);
   }
 
   loadComments(limit: number) {
     this.limitComments = limit;
 
-    this.commentService.loadPostComments$(this.limitComments, this.postId).subscribe({
-      next: (res) => {
-        this.comments = res.results as IComment[];
+    this.commentService.loadPostComments$(this.postId).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.comments = data as IComment[];
         this.commentsCount.emit(this.comments?.length);
       },
       complete: () => {

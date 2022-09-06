@@ -30,12 +30,8 @@ export class CommentService {
 
   constructor(private api: ApiService, private userService: UserService) { }
 
-  loadPostComments$(limit: number, postId: string): Observable<any> {
-    const pointerQuery = JSON.stringify({
-      "publication": createPointer('Publication', postId)
-    });
-
-    return this.api.get(`${this.postColl}/?where=${pointerQuery}${limit ? `&limit=${limit}` : ''}&include=author&order=-createdAt`);
+  loadPostComments$(postId: string): Observable<any> {
+    return this.api.get(`${this.postColl}/${postId}`);
   }
 
   createComment$(commentData: CreateCommentDto, postId: string): Observable<IComment> {
@@ -53,8 +49,8 @@ export class CommentService {
         map(response => response.body));
   }
 
-  deleteComment$(id: string): Observable<any> {
-    return this.api.delete(`${this.postColl}/${id}`);
+  deleteComment$(postId: string): Observable<any> {
+    return this.api.delete(`${this.postColl}/${postId}`);
   }
 
   editComment$(commentData: CreateCommentDto, postId: string, commentId: string): Observable<IComment> {

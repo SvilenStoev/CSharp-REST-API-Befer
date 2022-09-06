@@ -2,8 +2,11 @@
 {
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
+    using Befer.Server.Features.Comments.Models;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
+
+    using static FeaturesConstants.Comment;
 
     public class CommentService : ICommentService
     {
@@ -39,5 +42,30 @@
 
             return true;
         }
+
+        public async Task<IEnumerable<CommentListingServiceModel>> GetAll(string postId)
+            => await this.data
+                .Comments
+                .Where(c => c.PostId == postId)
+                .OrderByDescending(c => c.CreatedAt)
+                .Take(CommentsPerPost)
+                .Select(c => new CommentListingServiceModel
+                {
+                    ObjectId = c.Id,
+                    Content = c.Content,
+                    CreatedAt = c.CreatedAt,
+                    UpdatedAt = c.UpdatedAt,
+                    IsDeleted = c.IsDeleted,
+                    DeletedOn = c.DeletedOn,
+                    PostId = c.PostId,
+                    Author = new CommentAuthorListingServiceModel
+                    {
+                        ObjectId = c.AuthorId,
+                        Username = c.Author.UserName,
+                        FullName = c.Author.FullName,
+                        Email = c.Author.Email
+                    }
+                })
+                .ToListAsync();
     }
 }

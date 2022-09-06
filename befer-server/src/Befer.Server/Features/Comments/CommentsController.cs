@@ -1,11 +1,11 @@
 ﻿namespace Befer.Server.Features.Comments
 {
-    using Befer.Server.Data.Models;
     using Befer.Server.Features.Comments.Models;
-    using Befer.Server.Features.Posts.Models;
     using Befer.Server.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using static Infrastructure.WebConstants;
 
     [Authorize]
     public class CommentsController : ApiController
@@ -30,6 +30,13 @@
             }
 
             return Created(nameof(Create), new { Created = true });
+        }
+
+        [HttpGet]
+        [Route(postId)]
+        public async Task<IEnumerable<CommentListingServiceModel>> GetAll([FromRoute] string postId)
+        {
+            return await this.commentService.GetAll(postId);
         }
     }
 }

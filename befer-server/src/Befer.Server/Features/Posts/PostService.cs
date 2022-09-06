@@ -115,6 +115,9 @@
             return await this.data
                 .Posts
                 .Where(p => p.IsPublic == true)
+                .OrderByDescending(p => p.CreatedAt)
+                .Skip(skip)
+                .Take(PostsPerPage)
                 .Select(p => new PostListingServiceModel
                 {
                     ObjectId = p.Id,
@@ -123,9 +126,6 @@
                     CreatedAt = p.CreatedAt,
                     IsPublic = p.IsPublic
                 })
-                .OrderByDescending(p => p.CreatedAt)
-                .Skip(skip)
-                .Take(PostsPerPage)
                 .ToListAsync();
         }
 
@@ -136,6 +136,9 @@
             return await this.data
                 .Posts
                 .Where(p => p.Owner.Id == userId)
+                .OrderByDescending(p => p.CreatedAt)
+                .Skip(skip)
+                .Take(PostsPerPage)
                 .Select(p => new PostListingServiceModel
                 {
                     ObjectId = p.Id,
@@ -144,9 +147,6 @@
                     CreatedAt = p.CreatedAt,
                     IsPublic = p.IsPublic
                 })
-                .OrderByDescending(p => p.CreatedAt)
-                .Skip(skip)
-                .Take(PostsPerPage)
                 .ToListAsync();
         }
 
@@ -166,6 +166,6 @@
             => await this.data
                             .Posts
                             .Where(p => p.Id == id && p.OwnerId == userId)
-                            .FirstOrDefaultAsync(); 
+                            .FirstOrDefaultAsync();
     }
 }

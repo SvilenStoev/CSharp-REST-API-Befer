@@ -20,7 +20,7 @@
                             <b>{{comment.author?.username}}</b>
                             <span class="comment-date"> 
                                 <b>{{comment.author?.fullName}}&nbsp;{{(comment.createdAt || '') | createdBefore}}</b>
-                                <b *ngIf="comment.updatedAt != comment.createdAt">{{(comment.updatedAt || '') | updatedBefore}}</b>
+                                <b *ngIf="comment.updatedAt">{{(comment.updatedAt || '') | updatedBefore}}</b>
                             </span>
                         </header>
                         <p *ngIf="comment.objectId != editedCommentId" (mouseenter)="enterEditMode(comment.author?.objectId || '', comment.objectId!, comment.content)">{{comment.content}}</p>
