@@ -39,20 +39,15 @@
         {
             var post = await this.data
                 .Posts
-                .Where(p => p.Id == postId && p.Likes.Any(l => l.FromUserId == userId))
+                .Where(p => p.Id == postId)
                 .FirstOrDefaultAsync();
-
-            if (post == null)
-            {
-                return false;
-            }
 
             var like = await this.data
                 .Likes
                 .Where(l => l.FromUserId == userId && l.ToPostId == postId)
                 .FirstOrDefaultAsync();
 
-            if (like == null)
+            if (post == null || like == null)
             {
                 return false;
             }

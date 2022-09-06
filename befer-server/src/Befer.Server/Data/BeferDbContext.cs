@@ -16,6 +16,8 @@
 
         public DbSet<Like> Likes { get; init; }
 
+        public DbSet<Comment> Comments { get; init; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -25,6 +27,20 @@
                 .HasOne(p => p.Owner)
                 .WithMany(o => o.Posts)
                 .HasForeignKey(p => p.OwnerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Comment>()
+                .HasOne(c => c.Author)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(c => c.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Comment>()
+                .HasOne(c => c.Post)
+                .WithMany(p => p.Comments)
+                .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

@@ -28,8 +28,8 @@ export class CommentsComponent implements OnInit {
   inputClicked: boolean = false;
 
   @Input() postId: string;
-  @ViewChild('saveCommentForm') saveCommentForm: NgForm;
   @Output() commentsCount = new EventEmitter<any>();
+  @ViewChild('saveCommentForm') saveCommentForm: NgForm;
 
   comments: IComment[];
 

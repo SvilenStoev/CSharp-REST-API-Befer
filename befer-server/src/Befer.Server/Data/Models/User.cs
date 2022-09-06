@@ -11,5 +11,7 @@
         public IEnumerable<Post> Posts { get; } = new HashSet<Post>();
 
         public IEnumerable<Like> GivenLikes { get; } = new HashSet<Like>();
+
+        public IEnumerable<Comment> Comments { get; } = new HashSet<Comment>();
     }
 }

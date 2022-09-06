@@ -9,5 +9,9 @@
             public const int DescriptionMaxLength = 450;
         }
 
+        public class Comment
+        {
+            public const int ContentMaxLength = 200;
+        }
     }
 }
