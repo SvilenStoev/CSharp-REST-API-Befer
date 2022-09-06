@@ -31,20 +31,31 @@
         [Route(nameof(Register))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Register(RegisterRequestModel model)
+        public async Task<ActionResult<RegisterResponseModel>> Register(RegisterRequestModel model)
         {
-            var user = new User
+            var userData = new User
             {
                 UserName = model.Username,
                 FullName = model.FullName,
                 Email = model.Email,
             };
 
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await userManager.CreateAsync(userData, model.Password);
 
             if (result.Succeeded)
             {
-                return StatusCode((int)HttpStatusCode.Created);
+                var user = userManager.FindByNameAsync(model.Username).Result;
+
+                var token = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret);
+
+                var response = new RegisterResponseModel
+                {
+                    ObjectId = user.Id,
+                    Username = user.UserName,
+                    SessionToken = token
+                };
+
+                return Created(nameof(this.Register), response);
             }
 
             return BadRequest(result.Errors);
@@ -74,11 +85,10 @@
 
             return new LoginResponseModel
             {
-                Username = user.UserName,
                 ObjectId = user.Id,
+                Username = user.UserName,
                 SessionToken = token
             };
-
         }
     }
 }

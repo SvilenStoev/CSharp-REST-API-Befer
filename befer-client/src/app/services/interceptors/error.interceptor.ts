@@ -19,20 +19,29 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError(err => {
-          if (!err.error.title) {
+          if (!err.error.title && !err.error[0]) {
             throw {
               message: err.message,
             };
           } else if (err.error.status == 404) {
             this.router.navigate(['NotFound']);
-          } else {
+          } else if (err.error.title) {
             notifyErr(err.error.title);
           }
 
           //Error from server
-          throw {
-            message: err.error.title,
-            code: err.error.status
+          if (err.error[0].code == 'DuplicateUserName') {
+            notifyErr(err.error[0].description);
+
+            throw {
+              message: err.error[0].description,
+              code: 202
+            };
+          } else {
+            throw {
+              message: err.error.title,
+              code: err.error.status
+            }
           };
         }));
   }

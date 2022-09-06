@@ -55,18 +55,16 @@ export class UserService {
     return this.api
       .post<IUser>(this.userColl + '/register', data)
       .pipe(
-        map(response => { 
-          console.log(response)
-        })
-        // tap(user => {
-        //   const userData: UserDataDto = {
-        //     username: user.username,
-        //     id: user.objectId,
-        //     token: user.sessionToken
-        //   };
+        map(response => response.body),
+        tap(user => {
+          const userData: UserDataDto = {
+            username: user.username,
+            id: user.objectId,
+            token: user.sessionToken
+          };
 
-        //   this.storage.setUserData(userData);
-        // })
+          this.storage.setUserData(userData);
+        })
       );
   }
 
