@@ -74,7 +74,7 @@ export class CommentsComponent implements OnInit {
     const currComment = { content: data.content };
 
     this.isAddingComment = true;
-    this.comments.unshift(currComment);
+    //this.comments.unshift(currComment);
 
     this.commentService.createComment$(data, this.postId).subscribe({
       next: () => {

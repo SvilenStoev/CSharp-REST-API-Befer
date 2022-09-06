@@ -6,5 +6,6 @@
         {
             public const int PostsPerPage = 8;
         }
+
     }
 }

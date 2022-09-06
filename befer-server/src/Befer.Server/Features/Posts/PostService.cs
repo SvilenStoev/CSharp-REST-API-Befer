@@ -4,7 +4,6 @@
     using Befer.Server.Data.Models;
     using Befer.Server.Features.Posts.Models;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.VisualBasic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -34,9 +33,9 @@
                 OwnerId = userId
             };
 
-            data.Posts.Add(post);
+            this.data.Posts.Add(post);
 
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
 
             return post.Id;
         }
@@ -70,6 +69,13 @@
             {
                 return false;
             }
+
+            await this.data
+                .Likes
+                .Where(l => l.ToPostId == post.Id)
+                .ForEachAsync(l => this.data.Likes.Remove(l));
+
+            //TODO add remove comments by post
 
             this.data.Posts.Remove(post);
 

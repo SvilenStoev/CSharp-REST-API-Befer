@@ -17,7 +17,7 @@
                 .Where(p => p.Id == postId && p.Likes.All(l => l.FromUserId != userId))
                 .FirstOrDefaultAsync();
 
-            if (post == null)
+            if (post == null || post.OwnerId == userId)
             {
                 return false;
             }

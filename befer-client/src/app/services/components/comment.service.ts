@@ -8,8 +8,7 @@ import { UserService } from '../auth/user.service';
 
 export interface CreateCommentDto {
   content: string,
-  author: CreateAuthorDto,
-  publication: CreatePostDto
+  postId: string
 }
 
 export interface CreateAuthorDto {
@@ -27,7 +26,7 @@ export interface CreatePostDto {
 
 @Injectable()
 export class CommentService {
-  postColl: string = '/classes/Comment';
+  postColl: string = '/comments';
 
   constructor(private api: ApiService, private userService: UserService) { }
 
@@ -46,8 +45,7 @@ export class CommentService {
       throw new Error('Something went wrong!');
     }
 
-    commentData.author = createPointer('_User', userId);
-    commentData.publication = createPointer('Publication', postId);
+    commentData.postId = postId;
 
     return this.api
       .post<IComment>(this.postColl, commentData)
@@ -65,9 +63,6 @@ export class CommentService {
     if (!userId || !postId) {
       throw new Error('Something went wrong!');
     }
-
-    commentData.author = createPointer('_User', userId);
-    commentData.publication = createPointer('Publication', postId);
 
     return this.api
       .put<IComment>(`${this.postColl}/${commentId}`, commentData)
