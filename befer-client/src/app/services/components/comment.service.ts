@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 
 import { IComment } from '../../interfaces';
 import { ApiService } from '../api.service';
-import { createPointer } from '../../auth/util';
 import { UserService } from '../auth/user.service';
 
 export interface CreateCommentDto {

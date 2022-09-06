@@ -3,6 +3,7 @@
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
     using Befer.Server.Features.Comments.Models;
+    using Befer.Server.Features.Posts.Models;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
 
@@ -43,6 +44,39 @@
             return true;
         }
 
+        public async Task<bool> Update(string content, string commentId, string userId)
+        {
+            var comment = await this.GetByIdAndByUserId(commentId, userId);
+
+            if (comment == null)
+            {
+                return false;
+            }
+
+            comment.Content = content;
+            comment.UpdatedAt = DateTime.UtcNow;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> Delete(string commentId, string userId)
+        {
+            var comment = await this.GetByIdAndByUserId(commentId, userId);
+
+            if (comment == null)
+            {
+                return false;
+            }
+
+            this.data.Comments.Remove(comment);
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<IEnumerable<CommentListingServiceModel>> GetAll(string postId)
             => await this.data
                 .Comments
@@ -67,5 +101,11 @@
                     }
                 })
                 .ToListAsync();
+
+        private async Task<Comment> GetByIdAndByUserId(string commentId, string userId)
+          => await this.data
+                          .Comments
+                          .Where(c => c.Id == commentId && c.AuthorId == userId)
+                          .FirstOrDefaultAsync();
     }
 }

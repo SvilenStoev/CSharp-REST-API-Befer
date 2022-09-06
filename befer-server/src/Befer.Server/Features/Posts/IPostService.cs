@@ -14,11 +14,11 @@
             bool isPublic,
             string userId);
 
-        public Task<bool> Update(UpdatePostRequestModel model, string userId, string id);
+        public Task<bool> Update(UpdatePostRequestModel model, string userId, string postId);
 
-        public Task<bool> Delete(string id, string userId);
+        public Task<bool> Delete(string postId, string userId);
 
-        public Task<PostDetailsServiceModel> Details(string id, string userId);
+        public Task<PostDetailsServiceModel> Details(string postId, string userId);
 
         public Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip);
 

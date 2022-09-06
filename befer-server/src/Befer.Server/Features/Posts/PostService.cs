@@ -40,9 +40,9 @@
             return post.Id;
         }
 
-        public async Task<bool> Update(UpdatePostRequestModel model, string userId, string id)
+        public async Task<bool> Update(UpdatePostRequestModel model, string userId, string postId)
         {
-            var post = await this.GetByIdAndByUserId(id, userId);
+            var post = await this.GetByIdAndByUserId(postId, userId);
 
             if (post == null)
             {
@@ -54,16 +54,16 @@
             post.BeforeImgUrl = model.BeforeImgUrl;
             post.Title = model.Title;
             post.IsPublic = model.IsPublic;
-            post.UpdatedAt = DateTime.Now;
+            post.UpdatedAt = DateTime.UtcNow;
 
             await this.data.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> Delete(string id, string userId)
+        public async Task<bool> Delete(string postId, string userId)
         {
-            var post = await this.GetByIdAndByUserId(id, userId);
+            var post = await this.GetByIdAndByUserId(postId, userId);
 
             if (post == null)
             {
@@ -84,10 +84,10 @@
             return true;
         }
 
-        public async Task<PostDetailsServiceModel> Details(string id, string userId)
+        public async Task<PostDetailsServiceModel> Details(string postId, string userId)
             => await this.data
                     .Posts
-                    .Where(p => p.Id == id)
+                    .Where(p => p.Id == postId)
                     .Select(p => new PostDetailsServiceModel
                     {
                         ObjectId = p.Id,

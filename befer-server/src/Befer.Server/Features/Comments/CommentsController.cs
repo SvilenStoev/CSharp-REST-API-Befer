@@ -38,5 +38,37 @@
         {
             return await this.commentService.GetAll(postId);
         }
+
+        [HttpPut]
+        [Route(commentId)]
+        public async Task<ActionResult> Update([FromRoute] string commentId, [FromBody] UpdateCommentRequestModel model)
+        {
+            var userId = User.GetId();
+
+            var updated = await this.commentService.Update(model.Content, commentId, userId);
+
+            if (!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route(commentId)]
+        public async Task<ActionResult> Delete(string commentId)
+        {
+            var userId = User.GetId();
+
+            var deleted = await this.commentService.Delete(commentId, userId);
+
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }

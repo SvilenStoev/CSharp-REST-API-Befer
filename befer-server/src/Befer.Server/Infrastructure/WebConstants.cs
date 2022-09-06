@@ -4,5 +4,6 @@
     {
         public const string Id = "{id}";
         public const string postId = "{postId}";
+        public const string commentId = "{commentId}";
     }
 }
