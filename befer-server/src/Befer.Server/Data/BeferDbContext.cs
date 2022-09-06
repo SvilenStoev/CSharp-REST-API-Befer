@@ -3,6 +3,7 @@
     using Befer.Server.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using System.Reflection.Emit;
 
     public class BeferDbContext : IdentityDbContext<User>
     {
@@ -12,6 +13,8 @@
         }
 
         public DbSet<Post> Posts { get; init; }
+
+        public DbSet<Like> Likes { get; init; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,6 +27,23 @@
                 .HasForeignKey(p => p.OwnerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .Entity<Like>()
+                .HasKey(l => new { l.FromUserId, l.ToPostId });
+
+            builder
+                .Entity<Like>()
+                .HasOne(l => l.Post)
+                .WithMany(p => p.Likes)
+                .HasForeignKey(l => l.ToPostId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+               .Entity<Like>()
+               .HasOne(l => l.User)
+               .WithMany(u => u.GivenLikes)
+               .HasForeignKey(l => l.FromUserId)
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -18,7 +18,7 @@
 
         public Task<bool> Delete(string id, string userId);
 
-        public Task<PostDetailsServiceModel> Details(string id);
+        public Task<PostDetailsServiceModel> Details(string id, string userId);
 
         public Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip);
 

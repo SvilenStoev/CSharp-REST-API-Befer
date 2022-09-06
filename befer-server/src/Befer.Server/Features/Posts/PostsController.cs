@@ -1,5 +1,6 @@
 ﻿namespace Befer.Server.Features.Posts
 {
+    using Befer.Server.Features;
     using Befer.Server.Features.Posts.Models;
     using Befer.Server.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
@@ -73,8 +74,12 @@
         [HttpGet]
         [Route("Details/{id}")]
         public async Task<ActionResult<PostDetailsServiceModel>> Details(string id)
-         => await this.postService.Details(id);
+        {
+            var userId = User.GetId();
 
+            return await this.postService.Details(id, userId);
+        }
+        
         [HttpGet]
         [Route(nameof(GetAll))]
         public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip)

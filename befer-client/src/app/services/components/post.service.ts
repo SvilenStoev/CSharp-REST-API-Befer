@@ -17,6 +17,7 @@ export interface CreatePostDto {
 export class PostService {
 
   postColl: string = '/posts';
+  likeColl: string = '/likes';
   menuPostsHome: any = this.langService.get().postsHome;
   onlyPublic: string = JSON.stringify({
     isPublic: true
@@ -65,15 +66,14 @@ export class PostService {
     return this.api.delete(`${this.postColl}/${id}`);
   }
 
-  updateLikesByPostId$(newLikesData: string[], postId: string): Observable<any> {
-    const body = {
-      "likes": newLikesData
-    }
-
+  likeByPostId$(postId: string): Observable<any> {
     return this.api
-      .put<any>(`${this.postColl}/${postId}`, body)
-      .pipe(
-        map(response => response.body));
+      .post<any>(`${this.likeColl}/${postId}`);
+  }
+
+  dislikeByPostId$(postId: string): Observable<any> {
+    return this.api
+      .delete(`${this.likeColl}/${postId}`);
   }
 
   getSortType(sortType: string): string {

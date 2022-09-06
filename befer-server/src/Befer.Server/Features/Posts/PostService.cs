@@ -3,9 +3,9 @@
     using Befer.Server.Data;
     using Befer.Server.Data.Models;
     using Befer.Server.Features.Posts.Models;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using System.Security.Cryptography.X509Certificates;
+    using Microsoft.VisualBasic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using static FeaturesConstants.Post;
@@ -78,7 +78,7 @@
             return true;
         }
 
-        public async Task<PostDetailsServiceModel> Details(string id)
+        public async Task<PostDetailsServiceModel> Details(string id, string userId)
             => await this.data
                     .Posts
                     .Where(p => p.Id == id)
@@ -97,7 +97,8 @@
                             Email = p.Owner.Email,
                             FullName = p.Owner.FullName,
                             Username = p.Owner.UserName
-                        }
+                        },
+                        IsLiked = p.Likes.Any(l => l.FromUserId == userId)
                     })
                     .FirstOrDefaultAsync();
 

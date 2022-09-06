@@ -17,4 +17,5 @@ export interface IPost extends IBase {
     },
     isPublic: boolean;
     likes: string[];
+    isLiked: boolean;
 }

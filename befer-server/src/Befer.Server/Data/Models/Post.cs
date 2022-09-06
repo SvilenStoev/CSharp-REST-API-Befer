@@ -1,6 +1,7 @@
 ﻿namespace Befer.Server.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static DataConstants.Post;
 
     public class Post
@@ -26,6 +27,8 @@
 
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
+
+        public HashSet<Like> Likes { get; } = new HashSet<Like>();
 
         [Required]
         public string OwnerId { get; set; } 

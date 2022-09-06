@@ -1,5 +1,7 @@
 ﻿namespace Befer.Server.Features.Posts.Models
 {
+    using Befer.Server.Data.Models;
+
     public class PostDetailsServiceModel
     {
         public string ObjectId { get; set; }
@@ -17,5 +19,7 @@
         public string OwnerId { get; set; }
 
         public PostOwnerDetailsServiceModel Owner { get; set; }
+
+        public bool IsLiked { get; set; }
     }
 }

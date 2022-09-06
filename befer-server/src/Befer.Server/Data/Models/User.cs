@@ -9,5 +9,7 @@
         public string FullName { get; set; }
 
         public IEnumerable<Post> Posts { get; } = new HashSet<Post>();
+
+        public IEnumerable<Like> GivenLikes { get; } = new HashSet<Like>();
     }
 }

@@ -10,6 +10,7 @@
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using Befer.Server.Features.Identity.Models;
+    using Befer.Server.Features;
 
     public class IdentityController : ApiController
     {

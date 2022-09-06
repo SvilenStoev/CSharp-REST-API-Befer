@@ -10,6 +10,7 @@
     using Befer.Server.Features.Identity;
     using Microsoft.OpenApi.Models;
     using Befer.Server.Infrastructure.Filters;
+    using Befer.Server.Features.Likes;
 
     public static class ServiceCollectionExtensions
     {
@@ -66,7 +67,8 @@
         public static IServiceCollection AddAppServices(this IServiceCollection services)
             => services
                 .AddTransient<IPostService, PostService>()
-                .AddTransient<IIdentityService, IdentityService>();
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<ILikeService, LikeService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(options =>

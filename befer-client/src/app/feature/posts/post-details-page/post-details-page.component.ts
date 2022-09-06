@@ -61,7 +61,7 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
       next: (data) => {
         this.post = data as IPost;
         this.isOwner = this.post.owner.objectId == this.userId;
-        //this.isLiked = this.post.likes.includes(this.userId);
+        this.isLiked = this.post.isLiked;
         this.postId = this.post.objectId;
         this.transferData.setData(this.post);
       },
@@ -111,15 +111,10 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
       return;
     }
 
-    const previousLikes = this.post.likes;
-
-    this.post.likes.push(this.userId);
     this.isLiked = true;
     this.isLiking = true;
 
-    const newLikesArr = this.post.likes;
-
-    this.postService.updateLikesByPostId$(newLikesArr, this.postId).subscribe({
+    this.postService.likeByPostId$(this.postId).subscribe({
       next: () => {
 
       },
@@ -127,7 +122,6 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
         this.isLiking = false;
       },
       error: (err) => {
-        this.post.likes = previousLikes;
         this.isLiking = false;
         this.isLiked = false;
 
@@ -147,20 +141,10 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
       return;
     }
 
-    const previousLikes = this.post.likes;
-    const index = this.post.likes.indexOf(this.userId);
     this.isLiked = false;
     this.isDisliking = true;
 
-    if (index >= 0) {
-      this.post.likes.splice(index, 1);
-    } else {
-      return notifyErr('Something went wrong!');
-    }
-
-    const newLikesArr = this.post.likes;
-
-    this.postService.updateLikesByPostId$(newLikesArr, this.postId).subscribe({
+    this.postService.dislikeByPostId$(this.postId).subscribe({
       next: () => {
       },
       complete: () => {
@@ -169,7 +153,6 @@ export class PostDetailsPageComponent implements OnInit,OnDestroy {
       error: (err) => {
         this.isDisliking = false;
         this.isLiked = true;
-        this.post.likes = previousLikes;
 
         notifyErr(err.message);
       }
