@@ -264,9 +264,10 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
   }
 
   onMenuScores(): void {
-    this.gameApiService.loadAllScores$(10).subscribe({
+    this.gameApiService.loadAllScores$().subscribe({
       next: (data) => {
-        this.usersScores = (data.results as Array<any>).sort((a, b) => b.totalPoints - a.totalPoints);
+        this.usersScores = data as Array<any>;
+        console.log(data);
       },
       complete: () => {
       },
@@ -336,18 +337,16 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
       }
     });
 
-
-    // this.gameApiService.loadMyScores$().subscribe({
-    //   next: (res) => {
-    //     const data = res.results;
-
-    //     this.lastBestUserPoints = data[0]?.totalPoints;
-    //     this.lastScoresId = data[0]?.objectId;
-    //   },
-    //   error: () => {
-    //     console.log('Some error!');
-    //   }
-    // });
+    this.gameApiService.loadMyScores$().subscribe({
+      next: (data) => {
+        const gameScores = data;
+        this.lastBestUserPoints = gameScores[0]?.totalPoints;
+        this.lastScoresId = gameScores[0]?.objectId;
+      },
+      error: () => {
+        console.log('Some error!');
+      }
+    });
   }
 
   updateDatabaseUserScores() {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { createPointer } from 'src/app/auth/util';
 
 import { ApiService } from '../../api.service';
 import { UserService } from '../../auth/user.service';
@@ -35,11 +34,11 @@ export class GameApiService {
   }
 
   loadMyScores$(): Observable<any> {
-    return this.api.get(`${this.postColl} + /GetMine`);
+    return this.api.get(`${this.postColl}/getMine`);
   }
 
-  loadAllScores$(limit: number = 10): Observable<any> {
-    return this.api.get(`${this.postColl}?include=player&limit=${limit}`);
+  loadAllScores$(): Observable<any> {
+    return this.api.get(`${this.postColl}/getAll`);
   }
 
   updateScores$(userScores: UserScoresDto, id: string): Observable<any> {

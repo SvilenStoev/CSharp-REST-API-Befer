@@ -31,13 +31,18 @@
             return Created(nameof(Create), new { Created = true });
         }
 
-        //[HttpGet]
-        //[Route(nameof(GetMine))]
-        //public async Task<IEnumerable<GameScoresServiceModel>> GetMine()
-        //{
-        //    var userId = User.GetId();
+        [HttpGet]
+        [Route(nameof(GetMine))]
+        public async Task<IEnumerable<GameScoresServiceModel>> GetMine()
+        {
+            var userId = User.GetId();
 
-        //    return this.gameScoreService.GetMine(userId);
-        //}
+            return await this.gameScoreService.GetMine(userId);
+        }
+
+        [HttpGet]
+        [Route(nameof(GetALl))]
+        public async Task<IEnumerable<GameScoresAllServiceModel>> GetALl() 
+            => await this.gameScoreService.GetAll();
     }
 }

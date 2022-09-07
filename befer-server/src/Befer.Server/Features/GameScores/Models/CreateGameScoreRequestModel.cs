@@ -9,6 +9,13 @@
         public int AliensKilled { get; set; }
 
         [Required]
+        [Range(0, 1000)]
+        public int AliensMissed { get; set; }
+
+        [Required]
+        public int HealthRemaining { get; set; }
+
+        [Required]
         [Range(-1, 500)]
         public int TimeRemaining { get; set; }
 

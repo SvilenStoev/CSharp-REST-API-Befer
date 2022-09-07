@@ -7,5 +7,7 @@
         public Task<bool> Create(CreateGameScoreRequestModel model, string userId);
 
         public Task<IEnumerable<GameScoresServiceModel>> GetMine(string userId);
+
+        public Task<IEnumerable<GameScoresAllServiceModel>> GetAll();
     }
 }
