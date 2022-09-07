@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.showLoader = true;
 
-    this.userService.getProfile$().subscribe({
+    this.userService.getMyProfile$().subscribe({
       next: (user) => {
         this.currUser = user as IUser;
 

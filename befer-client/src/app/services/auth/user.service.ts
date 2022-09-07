@@ -68,8 +68,8 @@ export class UserService {
       );
   }
 
-  getProfile$(): Observable<any> {
-    return this.api.get(`${this.userColl}/${this.userId}`);
+  getMyProfile$(): Observable<any> {
+    return this.api.get(`${this.userColl + '/profile'}`);
   }
 
   editProfile$(userData: UserEditDto): Observable<any> {
@@ -93,6 +93,6 @@ export class UserService {
 
     // var parseFile = new Parse.File(name, file);
 
-    return this.api.put<IUser>(`${this.userColl}/${this.userId}`, userData);
+    return this.api.put<IUser>(`${this.userColl}`, userData);
   }
 }

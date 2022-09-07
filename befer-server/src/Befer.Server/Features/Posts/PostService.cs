@@ -54,7 +54,7 @@
             post.BeforeImgUrl = model.BeforeImgUrl;
             post.Title = model.Title;
             post.IsPublic = model.IsPublic;
-            post.UpdatedAt = DateTime.UtcNow;
+            post.UpdatedAt = DateTime.Now;
 
             await this.data.SaveChangesAsync();
 

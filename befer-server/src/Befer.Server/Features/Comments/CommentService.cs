@@ -54,7 +54,7 @@
             }
 
             comment.Content = content;
-            comment.UpdatedAt = DateTime.UtcNow;
+            comment.UpdatedAt = DateTime.Now;
 
             await this.data.SaveChangesAsync();
 

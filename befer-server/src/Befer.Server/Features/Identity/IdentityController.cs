@@ -1,16 +1,14 @@
 ﻿namespace Befer.Server.Features.Identity
 {
-    using System.Net;
-    using System.Text;
-    using System.Security.Claims;
-    using System.IdentityModel.Tokens.Jwt;
     using Befer.Server.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using Microsoft.IdentityModel.Tokens;
     using Befer.Server.Features.Identity.Models;
     using Befer.Server.Features;
+    using Befer.Server.Infrastructure.Extensions;
+
+    using static Infrastructure.WebConstants;
 
     public class IdentityController : ApiController
     {
@@ -90,6 +88,37 @@
                 Username = user.UserName,
                 SessionToken = token
             };
+        }
+
+        [HttpGet]
+        [Route(nameof(Profile))]
+        public async Task<ActionResult<ProfileServiceModel>> Profile()
+        {
+            var userId = User.GetId();
+
+            var userData = await this.identityService.Profile(userId);
+
+            if (userData == null)
+            {
+                return Unauthorized();
+            }
+
+            return userData;
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(UpdateProfileRequestModel model)
+        {
+            var userId = User.GetId();
+
+            var updated = await this.identityService.Update(userId, model);
+
+            if (!updated)
+            {
+                return Unauthorized();
+            }
+
+            return Ok();
         }
     }
 }

@@ -329,24 +329,25 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
 
   //API
   getCurrUserAndScores() {
-    this.userService.getProfile$().subscribe({
+    this.userService.getMyProfile$().subscribe({
       next: (user) => {
         this.currUserUsername = user?.username;
         this.currUserFullName = user?.fullName;
       }
     });
 
-    this.gameApiService.loadMyScores$(5).subscribe({
-      next: (res) => {
-        const data = res.results;
 
-        this.lastBestUserPoints = data[0]?.totalPoints;
-        this.lastScoresId = data[0]?.objectId;
-      },
-      error: () => {
-        console.log('Some error!');
-      }
-    });
+    // this.gameApiService.loadMyScores$(5).subscribe({
+    //   next: (res) => {
+    //     const data = res.results;
+
+    //     this.lastBestUserPoints = data[0]?.totalPoints;
+    //     this.lastScoresId = data[0]?.objectId;
+    //   },
+    //   error: () => {
+    //     console.log('Some error!');
+    //   }
+    // });
   }
 
   updateDatabaseUserScores() {
