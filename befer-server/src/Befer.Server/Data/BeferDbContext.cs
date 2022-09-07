@@ -18,6 +18,8 @@
 
         public DbSet<Comment> Comments { get; init; }
 
+        public DbSet<GameScore> GameScores { get; init; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -41,6 +43,13 @@
                 .HasOne(c => c.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<GameScore>()
+                .HasOne(gs => gs.Player)
+                .WithMany(p => p.GameScores)
+                .HasForeignKey(gs => gs.PlayerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

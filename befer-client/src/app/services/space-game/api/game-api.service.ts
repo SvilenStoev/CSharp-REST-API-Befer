@@ -23,33 +23,19 @@ export interface CreatePlayerDto {
 @Injectable()
 export class GameApiService {
 
-  postColl: string = '/classes/GameScores';
+  postColl: string = '/gameScores';
 
   constructor(private api: ApiService, private userService: UserService) { }
 
   createScores$(userScores: UserScoresDto): Observable<any> {
-    const userId = this.userService.userId;
-
-    if (!userId) {
-      throw new Error('Something went wrong!');
-    }
-
-    userScores.player = createPointer('_User', userId);
-
     return this.api
       .post<any>(this.postColl, userScores)
       .pipe(
         map(response => response.body));
   }
 
-  loadMyScores$(limit: number): Observable<any> {
-    const userId = this.userService.userId;
-
-    const pointerQuery = JSON.stringify({
-      "player": createPointer('_User', userId)
-    });
-
-    return this.api.get(`${this.postColl}/?where=${pointerQuery}${limit ? `&limit=${limit}` : ''}&include=player`);
+  loadMyScores$(): Observable<any> {
+    return this.api.get(`${this.postColl} + /GetMine`);
   }
 
   loadAllScores$(limit: number = 10): Observable<any> {

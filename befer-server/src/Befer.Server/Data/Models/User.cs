@@ -13,5 +13,7 @@
         public IEnumerable<Like> GivenLikes { get; } = new HashSet<Like>();
 
         public IEnumerable<Comment> Comments { get; } = new HashSet<Comment>();
+
+        public IEnumerable<GameScore> GameScores { get; } = new HashSet<GameScore>();
     }
 }

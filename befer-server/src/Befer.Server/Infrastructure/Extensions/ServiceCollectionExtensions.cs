@@ -12,6 +12,7 @@
     using Befer.Server.Infrastructure.Filters;
     using Befer.Server.Features.Likes;
     using Befer.Server.Features.Comments;
+    using Befer.Server.Features.GameScores;
 
     public static class ServiceCollectionExtensions
     {
@@ -70,7 +71,8 @@
                 .AddTransient<IPostService, PostService>()
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<ILikeService, LikeService>()
-                .AddTransient<ICommentService, CommentService>();
+                .AddTransient<ICommentService, CommentService>()
+                .AddTransient<IGameScoreService, GameScoreService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(options =>
