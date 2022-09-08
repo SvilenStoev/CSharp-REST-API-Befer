@@ -48,7 +48,7 @@ export class PostsHomeComponent implements OnInit {
     this.showLoader = true;
     this.limitPosts = limit;
 
-    this.postService.loadAllPosts$(this.sortType, 0).subscribe({
+    this.postService.loadAllPosts$(this.sortType, 0, limit).subscribe({
       next: (posts) => {
         if (this.sortType == this.menu.date) {
           this.sortByDate(posts);
@@ -72,6 +72,6 @@ export class PostsHomeComponent implements OnInit {
 
   sortByLikes(postsArr: IPost[]): void {
     this.sortType = this.menu.likes;
-    this.posts = postsArr.sort((a, b) => b.likes.length - a.likes.length);
+    this.posts = postsArr.sort((a, b) => b.likesCount - a.likesCount);
   }
 }

@@ -1,10 +1,11 @@
 ﻿namespace Befer.Server.Features.GameScores
 {
     using Befer.Server.Features.GameScores.Models;
-    using Befer.Server.Features.Posts.Models;
     using Befer.Server.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using static Infrastructure.WebConstants;
 
     [Authorize]
     public class GameScoresController : ApiController
@@ -31,6 +32,22 @@
             return Created(nameof(Create), new { Created = true });
         }
 
+        [HttpPut]
+        [Route("{scoresId}")]
+        public async Task<ActionResult> Update([FromBody] UpdateGameScoreRequestModel model, [FromRoute] string scoresId)
+        {
+            var userId = User.GetId();
+
+            var updated = await this.gameScoreService.Update(model, userId, scoresId);
+
+            if (!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
         [HttpGet]
         [Route(nameof(GetMine))]
         public async Task<IEnumerable<GameScoresServiceModel>> GetMine()
@@ -42,7 +59,7 @@
 
         [HttpGet]
         [Route(nameof(GetALl))]
-        public async Task<IEnumerable<GameScoresAllServiceModel>> GetALl() 
+        public async Task<IEnumerable<GameScoresAllServiceModel>> GetALl()
             => await this.gameScoreService.GetAll();
     }
 }

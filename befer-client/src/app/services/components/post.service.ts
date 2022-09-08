@@ -35,10 +35,10 @@ export class PostService {
     return this.api.get(`${this.postColl + '/userPostsCount'}`);
   }
 
-  loadAllPosts$(sortType: string, skipPosts: number): Observable<any> {
+  loadAllPosts$(sortType: string, skipPosts: number, limit?: number): Observable<any> {
     sortType = this.getSortType(sortType);
 
-    return this.api.get(`${this.postColl + '/getAll'}/?order=${sortType}&skip=${skipPosts}`);
+    return this.api.get(`${this.postColl + '/getAll'}/?order=${sortType}&skip=${skipPosts}${limit ? `&limit=${limit}` : '&limit=0'}`);
   }
 
   loadMyPosts$(sortType: string, skipPosts: number): Observable<any> {

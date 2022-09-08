@@ -37,6 +37,31 @@
             return true;
         }
 
+        public async Task<bool> Update(UpdateGameScoreRequestModel model, string userId, string scoresId)
+        {
+            var gameScore = await this.data
+                .GameScores
+                .Where(gs => gs.Id == scoresId && gs.PlayerId == userId)
+                .FirstOrDefaultAsync();
+
+            if (gameScore == null || gameScore.TotalPoints > model.TotalPoints)
+            {
+                return false;
+            }
+
+            gameScore.AliensKilled = model.AliensKilled;
+            gameScore.AliensMissed = model.AliensMissed;
+            gameScore.HealthRemaining = model.HealthRemaining;
+            gameScore.BoostRemaining = model.BoostRemaining;
+            gameScore.Points = model.Points;
+            gameScore.TimeRemaining = model.TimeRemaining;
+            gameScore.TotalPoints = model.TotalPoints;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<IEnumerable<GameScoresServiceModel>> GetMine(string userId)
         {
             var gameScores = await this.data

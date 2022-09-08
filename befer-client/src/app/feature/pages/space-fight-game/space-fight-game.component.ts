@@ -10,7 +10,7 @@ import { LanguageService } from 'src/app/services/common/language.service';
 import { SharedService } from 'src/app/services/space-game/shared.service';
 import { TabTitleService } from 'src/app/services/common/tab-title.service';
 import { BossGameService } from 'src/app/services/space-game/boss-game.service';
-import { GameApiService } from 'src/app/services/space-game/api/game-api.service';
+import { GameApiService, UserScoresDto } from 'src/app/services/space-game/api/game-api.service';
 import { SpaceGameService } from 'src/app/services/space-game/space-game.service';
 
 @Component({
@@ -42,14 +42,14 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
   spaceshipBoostSpeed: number = 0;
   bossHealth: number = objects.bossAlien.healthPoints;
   spaceshipHealth: number = objects.spaceship.healthPoints;
-  userScores: any;
+  userScores: UserScoresDto;
 
   //API related
   lastBestUserPoints: number;
   lastScoresId: string;
   currUserUsername: string;
   currUserFullName: string;
-  usersScores: any;
+  usersScores: UserScoresDto[];
 
   //Language
   menu: any = this.langService.get().spaceFightGame;
@@ -266,8 +266,7 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
   onMenuScores(): void {
     this.gameApiService.loadAllScores$().subscribe({
       next: (data) => {
-        this.usersScores = data as Array<any>;
-        console.log(data);
+        this.usersScores = data as Array<UserScoresDto>;
       },
       complete: () => {
       },
@@ -351,12 +350,12 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
 
   updateDatabaseUserScores() {
     if (!this.lastBestUserPoints) {
-      this.gameApiService.createScores$(gameState.userScores as any).subscribe({
+      this.gameApiService.createScores$(gameState.userScores as UserScoresDto).subscribe({
         next: () => {
 
         },
         complete: () => {
-          notifySuccess(`Scores (${gameState.userScores.totalPoints}) are added to the database!`);
+          notifySuccess(`Your first scores are added! (${gameState.userScores.totalPoints}) total points.`);
         },
         error: () => {
           console.log('Error');
@@ -365,7 +364,7 @@ export class SpaceFightGameComponent implements OnInit, OnDestroy {
     } else {
       //If there are current scores and they are lower than the new ones -> update database.
       if (gameState.userScores.totalPoints >= this.lastBestUserPoints) {
-        this.gameApiService.updateScores$(gameState.userScores as any, this.lastScoresId).subscribe({
+        this.gameApiService.updateScores$(gameState.userScores as UserScoresDto, this.lastScoresId).subscribe({
           next: () => {
 
           },

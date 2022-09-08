@@ -13,5 +13,7 @@
         public string BeforeImgUrl { get; set; }
 
         public bool IsPublic { get; set; }
+
+        public int LikesCount { get; set; }
     }
 }

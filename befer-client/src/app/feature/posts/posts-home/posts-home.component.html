@@ -23,7 +23,7 @@
                 <a class="btn details" [routerLink]="['/posts/details', post.objectId]">{{menu.seeAfter}}</a>
                 <div class="info-buttons">
                     <span>{{post.createdAt | date: 'mediumDate' }}</span>
-                    <!-- <span class="likes">{{post.likes?.length}} {{post.likes?.length == 1 ? menu.like : menu.likesCount}}</span> -->
+                    <span class="likes">{{post.likesCount}} {{post.likesCount == 1 ? menu.like : menu.likesCount}}</span>
                 </div>
             </div>
         </div>

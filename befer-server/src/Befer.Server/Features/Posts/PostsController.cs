@@ -82,9 +82,9 @@
         
         [HttpGet]
         [Route(nameof(GetAll))]
-        public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip)
+        public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip, int limit)
         {
-            return await this.postService.GetAll(order, skip);
+            return await this.postService.GetAll(order, skip, limit);
         }
 
 

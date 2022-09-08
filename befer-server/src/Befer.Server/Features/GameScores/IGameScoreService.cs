@@ -6,6 +6,8 @@
     {
         public Task<bool> Create(CreateGameScoreRequestModel model, string userId);
 
+        public Task<bool> Update(UpdateGameScoreRequestModel model, string userId, string scoresId);
+
         public Task<IEnumerable<GameScoresServiceModel>> GetMine(string userId);
 
         public Task<IEnumerable<GameScoresAllServiceModel>> GetAll();

@@ -1,6 +1,5 @@
 using Befer.Server.Data;
 using Befer.Server.Infrastructure.Extensions;
-using Befer.Server.Infrastructure.Filters;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,11 +23,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app
-        .UseDeveloperExceptionPage()
-        .UseSwaggerUI();
+       .UseDeveloperExceptionPage();
 }
 
 app
+    .UseSwaggerUI()
     .UseRouting()
     .UseHttpsRedirection()
     .UseCors(options => options

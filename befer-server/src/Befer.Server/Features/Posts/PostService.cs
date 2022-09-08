@@ -108,23 +108,27 @@
                     })
                     .FirstOrDefaultAsync();
 
-        public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip)
+        public async Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip, int limit)
         {
             //TODO check the order and order the posts according to the provided type
+
+            var isTopPosts = limit == 5 || limit == 10;
+            var limitPosts = isTopPosts ? limit : PostsPerPage;
 
             return await this.data
                 .Posts
                 .Where(p => p.IsPublic == true)
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip(skip)
-                .Take(PostsPerPage)
+                .Take(limitPosts)
                 .Select(p => new PostListingServiceModel
                 {
                     ObjectId = p.Id,
                     Title = p.Title,
                     BeforeImgUrl = p.BeforeImgUrl,
                     CreatedAt = p.CreatedAt,
-                    IsPublic = p.IsPublic
+                    IsPublic = p.IsPublic,
+                    LikesCount = p.Likes.Count()
                 })
                 .ToListAsync();
         }

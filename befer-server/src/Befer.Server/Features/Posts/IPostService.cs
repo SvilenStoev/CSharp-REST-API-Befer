@@ -20,7 +20,7 @@
 
         public Task<PostDetailsServiceModel> Details(string postId, string userId);
 
-        public Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip);
+        public Task<IEnumerable<PostListingServiceModel>> GetAll(string order, int skip, int limit);
 
         public Task<IEnumerable<PostListingServiceModel>> GetMine(string order, int skip, string userId);
 

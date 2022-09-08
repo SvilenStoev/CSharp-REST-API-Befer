@@ -2,21 +2,16 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { ApiService } from '../../api.service';
-import { UserService } from '../../auth/user.service';
 
 export interface UserScoresDto {
   aliensKilled: number,
+  aliensMissed: number,
   timeRemaining: number,
   boostRemaining: number,
   points: number,
   totalPoints: number,
-  player: CreatePlayerDto,
-}
-
-export interface CreatePlayerDto {
-  __type: string,
-  className: string,
-  objectId: string,
+  healthRemaining: number,
+  username?: string
 }
 
 @Injectable()
@@ -24,7 +19,7 @@ export class GameApiService {
 
   postColl: string = '/gameScores';
 
-  constructor(private api: ApiService, private userService: UserService) { }
+  constructor(private api: ApiService) { }
 
   createScores$(userScores: UserScoresDto): Observable<any> {
     return this.api

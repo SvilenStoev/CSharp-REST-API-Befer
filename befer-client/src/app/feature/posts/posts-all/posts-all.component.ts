@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { IPost } from 'src/app/interfaces';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { UserService } from 'src/app/services/auth/user.service';
 import { PostService } from 'src/app/services/components/post.service';
 import { LanguageService } from 'src/app/services/common/language.service';
 import { TabTitleService } from 'src/app/services/common/tab-title.service';
@@ -76,6 +75,7 @@ export class PostsAllComponent implements OnInit, OnDestroy {
 
       this.postService.loadAllPosts$(this.sortType, this.skipPosts).subscribe({
         next: (posts) => {
+          console.log(posts);
           if (this.sortType == this.menu.date) {
             this.sortByDate(posts);
           } else {
@@ -122,7 +122,7 @@ export class PostsAllComponent implements OnInit, OnDestroy {
 
   sortByLikes(postsArr: IPost[]): void {
     this.sortType = this.menu.likes;
-    this.posts = postsArr.sort((a, b) => b.likes.length - a.likes.length);
+    this.posts = postsArr.sort((a, b) => b.likesCount - a.likesCount);
   }
 
   //pagination logic

@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   appName: "Befer App",
   application: {
-    hostname: "https://localhost:44313"
+    hostname: "https://beferserver.azurewebsites.net"
   },
   lang: {
     title: "language",
