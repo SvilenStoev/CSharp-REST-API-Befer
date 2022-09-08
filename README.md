@@ -3,9 +3,13 @@
 ## &copy; Befer - Logo
 ![BoostUp Logo 4](https://www.linkpicture.com/q/Logo21.png)
 
-## :link: Hosted on
+## :link: Client side hosted on
 
-**Firebase -** 
+**Firebase -** https://befer-site.web.app
+
+## :link: Befer Web API
+
+**Hosted on Azure -** https://beferserver.azurewebsites.net/index.html
 
 ## :trollface: Test user
 You can try all features without registration using my test user. The test user has 3 public and 1 private posts for now.
@@ -61,7 +65,7 @@ Don't forget to see your score and rank at the end! :trophy:
 
 **How to play?** 
 - You can access the game from "page not found". So get the URL wrong. :smiley:
-- Or directly from this URL: https://befer-app.web.app/spacefight
+- Or directly from this URL: https://befer-site.web.app/spacefight
 
 > **Note**: You have to be logged in to play the game. Your scores are important for me and the ranking list.
 
