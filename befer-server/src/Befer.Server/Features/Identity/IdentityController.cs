@@ -120,5 +120,13 @@
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route(nameof(Logout))]
+        public async Task<ActionResult> Logout()
+        {
+            //TODO delete token
+            return Ok();
+        }
     }
 }

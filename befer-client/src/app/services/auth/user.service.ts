@@ -48,7 +48,7 @@ export class UserService {
   }
 
   logout$(): Observable<void> {
-    return this.api.post<void>('/logout');
+    return this.api.post<void>(this.userColl + '/logout');
   }
 
   register$(data: CreateUserDto): Observable<any> {

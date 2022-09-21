@@ -8,7 +8,6 @@
 
     using static Infrastructure.WebConstants;
 
-    [Authorize]
     public class PostsController : ApiController
     {
         private readonly IPostService postService;
@@ -18,6 +17,7 @@
             this.postService = postService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Create(CreatePostRequestModel model)
         {
@@ -39,6 +39,7 @@
             return Created(nameof(this.Create), response);
         }
 
+        [Authorize]
         [HttpPut]
         [Route(Id)]
         public async Task<ActionResult> Update([FromRoute] string id, [FromBody] UpdatePostRequestModel model)
@@ -55,6 +56,7 @@
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete]
         [Route(Id)]
         public async Task<ActionResult> Delete(string id)
@@ -71,6 +73,7 @@
             return Ok();
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Details/{id}")]
         public async Task<ActionResult<PostDetailsServiceModel>> Details(string id)
@@ -87,7 +90,7 @@
             return await this.postService.GetAll(order, skip, limit);
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route(nameof(GetMine))]
         public async Task<IEnumerable<PostListingServiceModel>> GetMine(string order, int skip)
