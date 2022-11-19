@@ -1,7 +1,7 @@
 > **Note**: This repository contains the code for building the server side of the Befer app, which was already written with Angular. The development of the initial client side code can be found in [this repository.](https://github.com/SvilenStoev/Angular-App-Befer) :warning: 
 
 ## &copy; Befer - Logo
-![BoostUp Logo 4](https://www.linkpicture.com/q/Logo21.png)
+![BoostUp Logo 4](https://i.ibb.co/X8G8pjJ/Befer-logo.png)
 
 ## :link: Client side hosted on
 
